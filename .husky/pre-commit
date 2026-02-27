@@ -1,4 +1,5 @@
 #!/bin/sh
 npx lint-staged          # ESLint on staged .ts files
+npm run typecheck        # type errors block commit
 npm run test:unit        # unit tests must be green
 npm run audit            # block on high/critical CVEs
