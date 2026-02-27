@@ -33,6 +33,8 @@ ACCEPTANCE (RED)
   → unit test domain (RED)        → implement domain (GREEN)
   → refactor (GREEN stays GREEN)
   → ACCEPTANCE (GREEN) ✓
+  → update ## Current State in CLAUDE.md
+  → commit
 ```
 
 Never write production code without a failing test driving it.
