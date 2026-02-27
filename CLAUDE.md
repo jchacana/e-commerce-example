@@ -153,6 +153,27 @@ it('saves a new product via the repository', async () => {
 - `src/domain/order/order.repository.ts` — `IOrderRepository` interface
 - Use case, controller, module: **not yet written — start here**
 
+## Quality Infrastructure
+
+### Pre-commit gates (in order)
+1. `npx lint-staged` — ESLint on staged `.ts` files, `--max-warnings=0`
+2. `npm run typecheck` — `tsc --noEmit`, full project
+3. `npm run test:unit` — unit tests only (acceptance excluded)
+4. `npm run audit` — blocks on high/critical CVEs
+
+### CI (`.github/workflows/ci.yml`)
+Runs on push and PR to `main`: lint → typecheck → test --coverage → audit.
+Uses `node-version-file: .tool-versions` and `npm ci`.
+
+### Coverage
+- Thresholds: 80% lines / statements / branches / functions
+- Denominator: all `src/**/*.ts` except `src/main.ts`
+- `--coverage` is NOT in the base `test` script — keeps watch mode fast
+- Run `npm run test:cov` to check locally on demand
+
+### Backlog
+Planned quality tools (ts-arch, Stryker, Secretlint, knip, Renovate, and others) are tracked in `docs/quality-roadmap.md`.
+
 ## Commands
 
 ```bash
@@ -160,6 +181,10 @@ npm test                   # full suite
 npm run test:acceptance    # acceptance layer only (outside-in entry point)
 npm run test:unit          # unit tests only
 npm run test:watch         # TDD watch mode
+npm run test:cov           # full suite + coverage report
+npm run typecheck          # tsc --noEmit — must pass before every commit
+npm run lint               # ESLint across src/ and test/
+npm run audit              # npm audit --audit-level=high --omit=dev
 npm run start:dev          # local dev server (uses in-memory repos)
 ```
 
