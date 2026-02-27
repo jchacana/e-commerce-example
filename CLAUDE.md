@@ -153,6 +153,8 @@ it('saves a new product via the repository', async () => {
 - `src/domain/order/order.repository.ts` — `IOrderRepository` interface
 - Use case, controller, module: **not yet written — start here**
 
+> **Discipline:** update this section as part of the commit that moves a slice from RED to GREEN.
+
 ## Quality Infrastructure
 
 ### Pre-commit gates (in order)
