@@ -82,6 +82,13 @@ Modules bind token → implementation:
 **Implementing a new feature or aggregate slice**: invoke the `tdd-feature` skill before
 writing any code. Do not begin implementation without it.
 
+## In Progress
+
+> Update this section when parking mid-cycle. Clear it when the cycle completes and you commit.
+> Format: feature name, current cycle position, next concrete step.
+
+_Nothing in progress — all slices GREEN._
+
 ## Current State
 
 ### Products — example slice (all tests GREEN)
