@@ -82,6 +82,9 @@ Modules bind token → implementation:
 **Implementing a new feature or aggregate slice**: invoke the `tdd-feature` skill before
 writing any code. Do not begin implementation without it.
 
+**Specs live in `docs/specs/`**. Read that directory before speccing any feature. If no spec
+exists for the feature, draft one in the established format and write it there before proceeding.
+
 ## In Progress
 
 > Update this section when parking mid-cycle. Clear it when the cycle completes and you commit.
