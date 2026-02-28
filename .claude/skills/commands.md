@@ -7,6 +7,7 @@ disable-model-invocation: true
 ## Commands
 
 ```bash
+npx jest path/to/file.spec.ts --no-coverage   # single file — use during red/green loop
 npm test                   # full suite
 npm run test:acceptance    # acceptance layer only (outside-in entry point)
 npm run test:unit          # unit tests only

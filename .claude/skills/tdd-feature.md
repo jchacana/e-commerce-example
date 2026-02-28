@@ -3,7 +3,7 @@ name: tdd-feature
 description: Outside-in TDD cycle for this project — load when implementing a new feature or aggregate slice
 ---
 
-Follow this cycle in order. Never skip a step or a layer.
+Load `test-patterns` alongside this skill. Follow this cycle in order. Never skip a step or a layer.
 
 ```
 SPEC (AGREED)
