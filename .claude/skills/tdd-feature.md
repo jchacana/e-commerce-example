@@ -12,12 +12,16 @@ SPEC (AGREED)
   → domain rules: invariants, validations, constraints
   → wait for explicit user confirmation before proceeding
 
-ACCEPTANCE (RED)
+For each scenario, one at a time:
+  ACCEPTANCE (RED)
   → unit test controller (RED)    → implement controller (GREEN)
   → unit test use case (RED)      → implement use case (GREEN)
   → unit test domain (RED)        → implement domain (GREEN)
   → refactor (GREEN stays GREEN)
   → ACCEPTANCE (GREEN) ✓
+  → commit
+
+When all scenarios are GREEN:
   → update ## Current State in CLAUDE.md
   → commit
 ```
