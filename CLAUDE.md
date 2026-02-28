@@ -85,11 +85,15 @@ Modules bind token → implementation:
 - `src/infrastructure/http/product/product.controller.ts` — `POST /products`
 - `src/infrastructure/product.module.ts` — NestJS wiring
 
-### Orders — your first TDD cycle (acceptance test RED)
-- `test/acceptance/orders.acceptance.spec.ts` — **RED**: `POST /orders` → 404
+### Orders — Place Order slice (all tests GREEN)
 - `src/domain/order/order.ts` — `Order` + `OrderItem` entities (domain tests GREEN)
-- `src/domain/order/order.repository.ts` — `IOrderRepository` interface
-- Use case, controller, module: **not yet written — start here**
+- `src/domain/order/order.repository.ts` — `IOrderRepository` interface + token
+- `src/application/order/place-order.use-case.ts` — `PlaceOrderUseCase` (unit tests GREEN)
+- `src/infrastructure/http/order/order.controller.ts` — `POST /orders` (unit tests GREEN)
+- `src/infrastructure/http/order/dto/place-order.dto.ts` — `PlaceOrderDto` with validation
+- `src/infrastructure/persistence/in-memory/in-memory-order.repository.ts` — in-memory impl
+- `src/infrastructure/order.module.ts` — NestJS wiring
+- `test/acceptance/orders.acceptance.spec.ts` — all 3 scenarios GREEN ✓
 
 > **Discipline:** update this section as part of the commit that moves a slice from RED to GREEN.
 

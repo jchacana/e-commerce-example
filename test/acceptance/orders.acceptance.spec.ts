@@ -31,6 +31,7 @@ describe('Orders (acceptance)', () => {
   });
 
   describe('POST /orders', () => {
+    // Covers: US1, FR-001..005, SC-001
     it('places an order and returns 201 with the persisted resource', async () => {
       await request(app.getHttpServer())
         .post('/orders')
@@ -48,6 +49,7 @@ describe('Orders (acceptance)', () => {
         });
     });
 
+    // Covers: US2, FR-006, SC-002
     it('returns 400 when customerId is missing', async () => {
       await request(app.getHttpServer())
         .post('/orders')
@@ -55,6 +57,7 @@ describe('Orders (acceptance)', () => {
         .expect(400);
     });
 
+    // Covers: US2, FR-007, SC-003
     it('returns 400 when items list is empty', async () => {
       await request(app.getHttpServer())
         .post('/orders')
