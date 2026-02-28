@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx husky:*)",
+      "WebFetch(domain:github.com)"
+    ]
+  }
+}

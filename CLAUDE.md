@@ -77,6 +77,11 @@ Modules bind token → implementation:
 | Module                | `<Name>Module`      | `ProductModule`               |
 | Spec file             | co-located, `.spec.ts` | `product.controller.spec.ts` |
 
+## Process
+
+**Implementing a new feature or aggregate slice**: invoke the `tdd-feature` skill before
+writing any code. Do not begin implementation without it.
+
 ## Current State
 
 ### Products — example slice (all tests GREEN)
