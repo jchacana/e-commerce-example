@@ -66,6 +66,20 @@ Follow the outside-in TDD cycle:
 5. Acceptance test goes GREEN → commit
 6. Repeat per scenario
 
+### Branching and Integration
+
+All work — whether by a human developer or an AI agent — happens on a branch, never
+directly on `main`.
+
+- Branch from `main`, name it for the work: `feat/get-products`, `chore/add-knip`, etc.
+- Commit with discipline on the branch: small, frequent, on green, conventional format.
+- Integrate into `main` via **squash merge only**. One branch = one commit on `main`.
+  This keeps the history linear and readable.
+- Delete the branch after merging.
+
+AI agents doing exploratory or parallel work follow the same rules: work in an isolated
+branch, commit there, integrate via squash when the work is accepted.
+
 ### Code Review
 
 Reviews enforce this working agreement. Reviewers should check:
