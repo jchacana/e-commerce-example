@@ -77,6 +77,16 @@ Modules bind token → implementation:
 | Module                | `<Name>Module`      | `ProductModule`               |
 | Spec file             | co-located, `.spec.ts` | `product.controller.spec.ts` |
 
+## Commit Messages
+
+This project enforces conventional commits via commitlint. Always use the format:
+
+```
+<type>: <description>
+```
+
+Common types: `feat`, `fix`, `chore`, `refactor`, `test`, `docs`. Description in imperative mood, present tense.
+
 ## Process
 
 **Implementing a new feature or aggregate slice**: invoke the `tdd-feature` skill before
