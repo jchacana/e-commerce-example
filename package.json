@@ -80,6 +80,9 @@
       }
     }
   },
+  "overrides": {
+    "multer": "2.1.0"
+  },
   "lint-staged": {
     "{src,test}/**/*.ts": "eslint --max-warnings=0"
   }
