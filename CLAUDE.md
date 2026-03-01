@@ -94,24 +94,12 @@ _Nothing in progress — all slices GREEN._
 
 ## Current State
 
-### Products — full CRUD read slice (all tests GREEN)
-- `src/domain/product/product.ts` — `Product` entity with `Product.create()`
-- `src/application/product/create-product.use-case.ts` — `CreateProductUseCase`
-- `src/application/product/get-all-products.use-case.ts` — `GetAllProductsUseCase`
-- `src/application/product/get-product.use-case.ts` — `GetProductUseCase`
-- `src/infrastructure/http/product/product.controller.ts` — `POST /products`, `GET /products`, `GET /products/:id`
-- `src/infrastructure/product.module.ts` — NestJS wiring
-- `test/acceptance/products.acceptance.spec.ts` — all 7 scenarios GREEN ✓
+Full inventory of implemented slices → [`docs/architecture.md`](docs/architecture.md)
 
-### Orders — Place Order slice (all tests GREEN)
-- `src/domain/order/order.ts` — `Order` + `OrderItem` entities (domain tests GREEN)
-- `src/domain/order/order.repository.ts` — `IOrderRepository` interface + token
-- `src/application/order/place-order.use-case.ts` — `PlaceOrderUseCase` (unit tests GREEN)
-- `src/infrastructure/http/order/order.controller.ts` — `POST /orders` (unit tests GREEN)
-- `src/infrastructure/http/order/dto/place-order.dto.ts` — `PlaceOrderDto` with validation
-- `src/infrastructure/persistence/in-memory/in-memory-order.repository.ts` — in-memory impl
-- `src/infrastructure/order.module.ts` — NestJS wiring
-- `test/acceptance/orders.acceptance.spec.ts` — all 3 scenarios GREEN ✓
+| Aggregate | Endpoints | Status |
+|-----------|-----------|--------|
+| Products  | `POST /products`, `GET /products`, `GET /products/:id` | all GREEN ✓ |
+| Orders    | `POST /orders` | all GREEN ✓ |
 
-> **Discipline:** update this section as part of the commit that moves a slice from RED to GREEN.
+> **Discipline:** update `docs/architecture.md` (and this table) as part of the commit that moves a slice from RED to GREEN.
 
