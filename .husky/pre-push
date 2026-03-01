@@ -1,2 +1,2 @@
 #!/bin/sh
-npm test                 # full suite (acceptance + unit)
+npm run test:cov         # full suite with coverage thresholds
