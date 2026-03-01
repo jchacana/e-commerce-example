@@ -80,6 +80,11 @@ directly on `main`.
 AI agents doing exploratory or parallel work follow the same rules: work in an isolated
 branch, commit there, integrate via squash when the work is accepted.
 
+**Experiment discipline:** any change whose outcome is uncertain must be tried in an
+isolated worktree first — never applied directly to the working tree. The agent commits
+its result to the worktree branch. If the experiment succeeds, squash merge the branch.
+Do not redo the work manually.
+
 ### Code Review
 
 Reviews enforce this working agreement. Reviewers should check:
