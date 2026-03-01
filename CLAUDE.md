@@ -2,6 +2,29 @@
 
 > Team working agreement (TDD, commits, design principles, process, local setup): [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
+## Non-Negotiables
+
+These apply to every AI assistant working in this codebase, every session.
+
+### TDD
+- Write a failing test before any production code. No exceptions.
+- Run the suite after every change and report the result.
+- Write the minimum code to make the failing test pass. No more.
+- Never refactor on red.
+
+### Scope
+- Do only what was asked. Flag out-of-scope improvements, never act on them silently.
+- Prefer many small steps over one large one.
+
+### Design
+- YAGNI: nothing not required by a currently failing test.
+- Four Rules of Simple Design: passes tests → reveals intent → no duplication → fewest elements.
+- Prefer duplication over the wrong abstraction.
+
+### Experiments
+- Any change with uncertain outcome runs in a worktree first — never modify the working tree directly.
+- The agent commits its result to the worktree branch. If accepted, squash merge. Do not redo the work manually.
+
 ## Architecture
 
 Outside-in layered architecture following hexagonal principles:
