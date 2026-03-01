@@ -9,6 +9,7 @@
 - GitHub Actions CI: lint → typecheck → test (with coverage) → audit
 - Jest coverage thresholds: 80% lines/statements/branches/functions
 - `docs/specs/` — specs as source of truth before any feature implementation
+- Secretlint — scans all staged files for credential patterns on pre-commit and CI; `.env.example` excluded via `.secretlintignore`
 
 ## Planned
 
@@ -18,11 +19,6 @@ Express hexagonal boundary rules as Jest tests. A boundary violation goes RED li
 - Location: `test/architecture/hexagonal.spec.ts`
 - Wire into: CI (`npm test` picks it up automatically)
 - Note: replaces dependency-cruiser as the primary expression of architectural intent. dependency-cruiser may still be kept for fast staged-file pre-commit checks, but ts-arch is the authoritative gate.
-
-### Secretlint — secrets detection
-Scans staged files for strings matching known secret formats (AWS keys, JWTs, high-entropy tokens). Complements `eslint-plugin-security`, which catches unsafe code patterns but not credential strings.
-- Wire into: lint-staged (before ESLint), CI
-- Priority: high — one committed secret is a breach
 
 ### Stryker — mutation testing
 Validates test quality, not just coverage. Makes small mutations to production code (flips `>` to `>=`, deletes a `throw`, inverts a condition) and checks whether the test suite catches them. A surviving mutation means logic exists with no test asserting it.
