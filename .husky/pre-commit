@@ -2,4 +2,8 @@
 npx lint-staged          # ESLint on staged .ts files
 npm run typecheck        # type errors block commit
 npm run test:unit        # unit tests must be green
-npm run audit            # block on high/critical CVEs
+
+# Audit only when source or dependency files are staged
+if git diff --cached --name-only | grep -qE '^(src/|test/|package\.json|package-lock\.json)'; then
+  npm run audit
+fi
