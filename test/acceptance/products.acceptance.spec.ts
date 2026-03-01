@@ -66,5 +66,24 @@ describe('Products (acceptance)', () => {
 
       await freshApp.close();
     });
+
+    // SC-001
+    it('returns 200 with all products', async () => {
+      const { body: created } = await request(app.getHttpServer())
+        .post('/products')
+        .send({ name: 'Widget', price: 9.99 })
+        .expect(201);
+
+      await request(app.getHttpServer())
+        .get('/products')
+        .expect(200)
+        .expect(({ body }) => {
+          expect(body).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({ id: created.id, name: 'Widget', price: 9.99 }),
+            ]),
+          );
+        });
+    });
   });
 });
