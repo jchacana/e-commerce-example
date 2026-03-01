@@ -14,6 +14,15 @@
 - dependency-cruiser — static import graph rules; three forbidden boundary rules enforced at pre-commit and CI
 - knip — unused files, exports, and dependencies; CI only; `src/**/*.dto.ts` treated as entry points to avoid decorator false positives
 
+## Known Warnings (no direct fix available)
+
+Deprecation warnings that appear on `npm ci` with no actionable fix path:
+
+- `glob@7` (×1) + `inflight` — via `babel-plugin-istanbul` → `test-exclude`, a jest internal. Will clear when jest updates `babel-plugin-istanbul` or `test-exclude` to use a newer glob.
+- `glob@10.4.5` — via `@nestjs/cli`. Will clear when `@nestjs/cli` updates its dependency tree.
+
+`npm audit --audit-level=high --omit=dev` is clean. These are dev-only and cosmetic.
+
 ## Planned
 
 ### Stryker — mutation testing
