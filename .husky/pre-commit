@@ -1,6 +1,7 @@
 #!/bin/sh
 npx lint-staged          # ESLint on staged .ts files
 npm run typecheck        # type errors block commit
+npm run arch:check       # architectural boundary violations block commit
 npm run test:unit        # unit tests must be green
 
 # Audit only when source or dependency files are staged

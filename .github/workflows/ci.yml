@@ -32,6 +32,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Architecture check
+        run: npm run arch:check
+
       - name: Typecheck
         run: npm run typecheck
 

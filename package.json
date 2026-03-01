@@ -16,7 +16,8 @@
     "test:watch": "jest --watch",
     "test:acceptance": "jest --testPathPattern=acceptance --runInBand",
     "test:unit": "jest --testPathIgnorePatterns=acceptance --runInBand",
-    "secretlint": "secretlint --secretlintrc .secretlintrc.json \"**/*\""
+    "secretlint": "secretlint --secretlintrc .secretlintrc.json \"**/*\"",
+    "arch:check": "depcruise src --config .dependency-cruiser.cjs"
   },
   "dependencies": {
     "@nestjs/common": "^10.3.0",
@@ -41,6 +42,7 @@
     "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
+    "dependency-cruiser": "^17.3.8",
     "eslint": "^9.39.3",
     "eslint-plugin-security": "^4.0.0",
     "husky": "^9.1.7",

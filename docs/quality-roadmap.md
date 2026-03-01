@@ -11,6 +11,7 @@
 - `docs/specs/` — specs as source of truth before any feature implementation
 - Secretlint — scans all staged files for credential patterns on pre-commit and CI; `.env.example` excluded via `.secretlintignore`
 - commitlint — enforces conventional commit format (`feat:`, `fix:`, `chore:`, etc.) on `commit-msg` hook
+- dependency-cruiser — static import graph rules; three forbidden boundary rules enforced at pre-commit and CI
 
 ## Planned
 
@@ -30,11 +31,6 @@ Opens PRs automatically when dependencies have updates; CI runs against each PR.
 - Config: `renovate.json` at repo root
 - Group strategy: patch/minor together, major separate
 - Wire into: GitHub App (no local tooling needed)
-
-### dependency-cruiser — static import graph rules
-Config-file-based architectural boundary enforcement. Runs on full `src/` at pre-commit (~1.5s); startup cost dominates so per-file is not meaningfully faster.
-- Config: `.dependency-cruiser.cjs`
-- Wire into: pre-commit (full src/ scan), CI
 
 ### Prettier — formatting
 Consistent formatting (indentation, trailing commas, line length). Eliminates formatting noise in diffs and reviews.
