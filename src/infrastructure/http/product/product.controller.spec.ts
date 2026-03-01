@@ -1,15 +1,21 @@
 import { ProductController } from './product.controller';
 import { CreateProductUseCase } from '../../../application/product/create-product.use-case';
 import { CreateProductCommand } from '../../../application/product/create-product.command';
+import { GetAllProductsUseCase } from '../../../application/product/get-all-products.use-case';
 import { Product } from '../../../domain/product/product';
 
 describe('ProductController', () => {
   let controller: ProductController;
   let mockCreateProduct: { execute: jest.Mock };
+  let mockGetAllProducts: { execute: jest.Mock };
 
   beforeEach(() => {
     mockCreateProduct = { execute: jest.fn() };
-    controller = new ProductController(mockCreateProduct as unknown as CreateProductUseCase);
+    mockGetAllProducts = { execute: jest.fn() };
+    controller = new ProductController(
+      mockCreateProduct as unknown as CreateProductUseCase,
+      mockGetAllProducts as unknown as GetAllProductsUseCase,
+    );
   });
 
   it('delegates to CreateProductUseCase with a command built from the DTO', async () => {
@@ -31,5 +37,15 @@ describe('ProductController', () => {
     const result = await controller.create({ name: 'Gadget', price: 49.99 });
 
     expect(result).toBe(product);
+  });
+
+  it('delegates to GetAllProductsUseCase and returns the result', async () => {
+    const products = [Product.create('1', 'Widget', 9.99)];
+    mockGetAllProducts.execute.mockResolvedValue(products);
+
+    const result = await controller.findAll();
+
+    expect(mockGetAllProducts.execute).toHaveBeenCalledTimes(1);
+    expect(result).toBe(products);
   });
 });

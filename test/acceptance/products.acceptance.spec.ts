@@ -3,17 +3,21 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../../src/app.module';
 
+async function buildApp(): Promise<INestApplication> {
+  const module: TestingModule = await Test.createTestingModule({
+    imports: [AppModule],
+  }).compile();
+  const app = module.createNestApplication();
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  await app.init();
+  return app;
+}
+
 describe('Products (acceptance)', () => {
   let app: INestApplication;
 
   beforeAll(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-
-    app = module.createNestApplication();
-    app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
-    await app.init();
+    app = await buildApp();
   });
 
   afterAll(async () => {
@@ -45,6 +49,22 @@ describe('Products (acceptance)', () => {
         .post('/products')
         .send({ name: 'Widget', price: 0 })
         .expect(400);
+    });
+  });
+
+  describe('GET /products', () => {
+    // SC-002
+    it('returns 200 with an empty array when no products exist', async () => {
+      const freshApp = await buildApp();
+
+      await request(freshApp.getHttpServer())
+        .get('/products')
+        .expect(200)
+        .expect(({ body }) => {
+          expect(body).toEqual([]);
+        });
+
+      await freshApp.close();
     });
   });
 });
