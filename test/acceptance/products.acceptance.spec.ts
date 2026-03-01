@@ -86,4 +86,23 @@ describe('Products (acceptance)', () => {
         });
     });
   });
+
+  describe('GET /products/:id', () => {
+    // SC-003
+    it('returns 200 with the product when it exists', async () => {
+      const { body: created } = await request(app.getHttpServer())
+        .post('/products')
+        .send({ name: 'Gadget', price: 19.99 })
+        .expect(201);
+
+      await request(app.getHttpServer())
+        .get(`/products/${created.id}`)
+        .expect(200)
+        .expect(({ body }) => {
+          expect(body.id).toBe(created.id);
+          expect(body.name).toBe('Gadget');
+          expect(body.price).toBe(19.99);
+        });
+    });
+  });
 });
