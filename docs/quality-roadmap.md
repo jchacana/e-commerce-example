@@ -5,8 +5,10 @@
 - ESLint (`@typescript-eslint` + `eslint-plugin-security`) — lint gate on pre-commit and CI
 - TypeScript strict mode — structural type safety
 - Husky pre-commit: lint-staged → typecheck → test:unit → audit
+- Husky pre-push: full suite with coverage thresholds — catches coverage failures before CI
 - GitHub Actions CI: lint → typecheck → test (with coverage) → audit
 - Jest coverage thresholds: 80% lines/statements/branches/functions
+- `docs/specs/` — specs as source of truth before any feature implementation
 
 ## Planned
 
