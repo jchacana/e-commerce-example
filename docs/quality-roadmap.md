@@ -10,6 +10,7 @@
 - Jest coverage thresholds: 80% lines/statements/branches/functions
 - `docs/specs/` — specs as source of truth before any feature implementation
 - Secretlint — scans all staged files for credential patterns on pre-commit and CI; `.env.example` excluded via `.secretlintignore`
+- commitlint — enforces conventional commit format (`feat:`, `fix:`, `chore:`, etc.) on `commit-msg` hook
 
 ## Planned
 
@@ -42,11 +43,6 @@ Config-file-based architectural boundary enforcement. Faster than ts-arch for st
 - Config: `.dependency-cruiser.cjs`
 - Wire into: pre-commit (on changed files only), CI
 - See ts-arch note above for relationship between the two
-
-### commitlint — commit message format
-Enforce conventional commit message format (`feat:`, `fix:`, `chore:`, etc.). Enables automated changelog generation downstream (release-please, standard-version).
-- Config: `commitlint.config.cjs`
-- Wire into: `commit-msg` Husky hook
 
 ### Prettier — formatting
 Consistent formatting (indentation, trailing commas, line length). Eliminates formatting noise in diffs and reviews.
