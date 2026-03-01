@@ -23,6 +23,6 @@ Uses `node-version-file: .tool-versions` and `npm ci`.
 - `--coverage` is NOT in the base `test` script — keeps watch mode fast
 - Run `npm run test:cov` to check locally on demand
 
-## Backlog
+## Roadmap
 
-Planned quality tools (ts-arch, Stryker, Secretlint, knip, Renovate, and others) are tracked in `docs/quality-roadmap.md`.
+Planned quality tooling: `docs/quality-roadmap.md`.
