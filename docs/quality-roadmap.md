@@ -14,13 +14,6 @@
 
 ## Planned
 
-### ts-arch — architecture fitness functions
-Express hexagonal boundary rules as Jest tests. A boundary violation goes RED like any other failing test; the error names the offending import.
-- Rules: domain must not import from infrastructure or application; application must not import from infrastructure/http
-- Location: `test/architecture/hexagonal.spec.ts`
-- Wire into: CI (`npm test` picks it up automatically)
-- Note: replaces dependency-cruiser as the primary expression of architectural intent. dependency-cruiser may still be kept for fast staged-file pre-commit checks, but ts-arch is the authoritative gate.
-
 ### Stryker — mutation testing
 Validates test quality, not just coverage. Makes small mutations to production code (flips `>` to `>=`, deletes a `throw`, inverts a condition) and checks whether the test suite catches them. A surviving mutation means logic exists with no test asserting it.
 - Scope to start: `src/domain/` only — fast, high signal, directly tests TDD discipline on invariants
@@ -39,10 +32,9 @@ Opens PRs automatically when dependencies have updates; CI runs against each PR.
 - Wire into: GitHub App (no local tooling needed)
 
 ### dependency-cruiser — static import graph rules
-Config-file-based architectural boundary enforcement. Faster than ts-arch for staged-file pre-commit checks.
+Config-file-based architectural boundary enforcement. Runs on full `src/` at pre-commit (~1.5s); startup cost dominates so per-file is not meaningfully faster.
 - Config: `.dependency-cruiser.cjs`
-- Wire into: pre-commit (on changed files only), CI
-- See ts-arch note above for relationship between the two
+- Wire into: pre-commit (full src/ scan), CI
 
 ### Prettier — formatting
 Consistent formatting (indentation, trailing commas, line length). Eliminates formatting noise in diffs and reviews.
