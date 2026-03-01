@@ -16,7 +16,7 @@ For each scenario, one at a time:
   ACCEPTANCE (RED)
   → unit test controller (RED)    → implement controller (GREEN)
   → unit test use case (RED)      → implement use case (GREEN)
-  → unit test domain (RED)        → implement domain (GREEN)
+  → unit test domain (RED)        → implement domain (GREEN)  [skip if no new domain behaviour]
   → refactor (GREEN stays GREEN)
   → ACCEPTANCE (GREEN) ✓
   → commit
