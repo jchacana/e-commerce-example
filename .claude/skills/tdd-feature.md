@@ -8,7 +8,7 @@ Load `test-patterns` alongside this skill. Follow this cycle in order. Never ski
 ```
 SPEC (AGREED)
   → HTTP contract: method, path, request body, response body, status codes
-  → acceptance scenarios: happy path + all error/edge cases
+  → acceptance scenarios: happy path + all error/edge cases, using Given/When/Then format
   → domain rules: invariants, validations, constraints
   → wait for explicit user confirmation before proceeding
 

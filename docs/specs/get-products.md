@@ -11,16 +11,26 @@
 > so that I can browse the catalogue.
 
 Acceptance scenarios:
-- Given no products exist → returns an empty list
-- Given one or more products exist → returns all of them
+- Given no products have been created
+- When the client requests all products
+- Then an empty list is returned
+
+- Given one or more products exist
+- When the client requests all products
+- Then all products are returned
 
 **US2 — Client retrieves a single product**
 > As a client, I want to fetch a product by its ID
 > so that I can view its details.
 
 Acceptance scenarios:
-- Given a product with the requested ID exists → returns it
-- Given no product with the requested ID exists → rejected
+- Given a product with the requested ID exists
+- When the client requests it by ID
+- Then the product is returned
+
+- Given no product with the requested ID exists
+- When the client requests it by ID
+- Then the request is rejected
 
 ---
 
