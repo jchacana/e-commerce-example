@@ -1,4 +1,6 @@
-# ecommerce-api — Project Context
+# ecommerce-api — AI Assistant Context
+
+> Team working agreement (TDD, commits, design principles, process, local setup): [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 ## Architecture
 
