@@ -15,7 +15,8 @@
     "test:cov": "jest --coverage",
     "test:watch": "jest --watch",
     "test:acceptance": "jest --testPathPattern=acceptance --runInBand",
-    "test:unit": "jest --testPathIgnorePatterns=acceptance --runInBand"
+    "test:unit": "jest --testPathIgnorePatterns=acceptance --runInBand",
+    "secretlint": "secretlint --secretlintrc .secretlintrc.json \"**/*\""
   },
   "dependencies": {
     "@nestjs/common": "^10.3.0",
@@ -31,6 +32,7 @@
     "@nestjs/cli": "^10.3.0",
     "@nestjs/schematics": "^10.1.0",
     "@nestjs/testing": "^10.3.0",
+    "@secretlint/secretlint-rule-preset-recommend": "^11.3.1",
     "@types/jest": "^29.5.12",
     "@types/node": "^22.0.0",
     "@types/supertest": "^6.0.2",
@@ -42,6 +44,7 @@
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "lint-staged": "^16.2.7",
+    "secretlint": "^11.3.1",
     "source-map-support": "^0.5.21",
     "supertest": "^6.3.4",
     "ts-jest": "^29.1.2",
@@ -84,6 +87,7 @@
     "multer": "2.1.0"
   },
   "lint-staged": {
+    "**/*": "secretlint --secretlintrc .secretlintrc.json",
     "{src,test}/**/*.ts": "eslint --max-warnings=0"
   }
 }
