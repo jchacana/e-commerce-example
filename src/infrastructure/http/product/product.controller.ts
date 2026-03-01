@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
 import { CreateProductUseCase } from '../../../application/product/create-product.use-case';
 import { GetAllProductsUseCase } from '../../../application/product/get-all-products.use-case';
 import { GetProductUseCase } from '../../../application/product/get-product.use-case';
@@ -24,7 +24,9 @@ export class ProductController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.getProduct.execute(id);
+  async findOne(@Param('id') id: string) {
+    const product = await this.getProduct.execute(id);
+    if (!product) throw new NotFoundException();
+    return product;
   }
 }

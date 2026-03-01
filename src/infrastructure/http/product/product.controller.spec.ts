@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { ProductController } from './product.controller';
 import { CreateProductUseCase } from '../../../application/product/create-product.use-case';
 import { CreateProductCommand } from '../../../application/product/create-product.command';
@@ -61,5 +62,11 @@ describe('ProductController', () => {
 
     expect(mockGetProduct.execute).toHaveBeenCalledWith('1');
     expect(result).toBe(product);
+  });
+
+  it('throws NotFoundException when the product does not exist', async () => {
+    mockGetProduct.execute.mockResolvedValue(null);
+
+    await expect(controller.findOne('nonexistent-id')).rejects.toThrow(NotFoundException);
   });
 });

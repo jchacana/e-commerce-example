@@ -88,6 +88,13 @@ describe('Products (acceptance)', () => {
   });
 
   describe('GET /products/:id', () => {
+    // SC-004
+    it('returns 404 when the product does not exist', async () => {
+      await request(app.getHttpServer())
+        .get('/products/nonexistent-id')
+        .expect(404);
+    });
+
     // SC-003
     it('returns 200 with the product when it exists', async () => {
       const { body: created } = await request(app.getHttpServer())

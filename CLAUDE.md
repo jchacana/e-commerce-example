@@ -94,11 +94,14 @@ _Nothing in progress — all slices GREEN._
 
 ## Current State
 
-### Products — example slice (all tests GREEN)
+### Products — full CRUD read slice (all tests GREEN)
 - `src/domain/product/product.ts` — `Product` entity with `Product.create()`
 - `src/application/product/create-product.use-case.ts` — `CreateProductUseCase`
-- `src/infrastructure/http/product/product.controller.ts` — `POST /products`
+- `src/application/product/get-all-products.use-case.ts` — `GetAllProductsUseCase`
+- `src/application/product/get-product.use-case.ts` — `GetProductUseCase`
+- `src/infrastructure/http/product/product.controller.ts` — `POST /products`, `GET /products`, `GET /products/:id`
 - `src/infrastructure/product.module.ts` — NestJS wiring
+- `test/acceptance/products.acceptance.spec.ts` — all 7 scenarios GREEN ✓
 
 ### Orders — Place Order slice (all tests GREEN)
 - `src/domain/order/order.ts` — `Order` + `OrderItem` entities (domain tests GREEN)
