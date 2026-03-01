@@ -1,0 +1,14 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/main.ts",
+    "src/**/*.module.ts",
+    "src/**/*.dto.ts"
+  ],
+  "project": [
+    "src/**/*.ts"
+  ],
+  "ignoreDependencies": [
+    "@secretlint/secretlint-rule-preset-recommend"
+  ]
+}

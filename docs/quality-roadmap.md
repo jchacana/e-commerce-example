@@ -12,6 +12,7 @@
 - Secretlint — scans all staged files for credential patterns on pre-commit and CI; `.env.example` excluded via `.secretlintignore`
 - commitlint — enforces conventional commit format (`feat:`, `fix:`, `chore:`, etc.) on `commit-msg` hook
 - dependency-cruiser — static import graph rules; three forbidden boundary rules enforced at pre-commit and CI
+- knip — unused files, exports, and dependencies; CI only; `src/**/*.dto.ts` treated as entry points to avoid decorator false positives
 
 ## Planned
 
@@ -20,11 +21,6 @@ Validates test quality, not just coverage. Makes small mutations to production c
 - Scope to start: `src/domain/` only — fast, high signal, directly tests TDD discipline on invariants
 - Wire into: scheduled CI job (weekly), not every push — it is slow
 - Implement after: Orders acceptance test is GREEN
-
-### knip — unused code detection
-Finds unused files, unused exports, and unused entries in `package.json` dependencies. In a hexagonal architecture this catches repository interface methods no use case calls, commands with unread fields, and orphaned modules.
-- Wire into: CI only (whole-project scope is too slow for pre-commit)
-- Implement after: Orders slice is complete
 
 ### Renovate — automated dependency updates
 Opens PRs automatically when dependencies have updates; CI runs against each PR. Proactive complement to `npm audit` (which is reactive — fires only after a CVE is published).

@@ -35,6 +35,9 @@ jobs:
       - name: Architecture check
         run: npm run arch:check
 
+      - name: Unused code
+        run: npx knip
+
       - name: Typecheck
         run: npm run typecheck
 
