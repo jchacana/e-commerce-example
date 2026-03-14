@@ -25,6 +25,8 @@ These apply to every AI assistant working in this codebase, every session.
 - Any change with uncertain outcome runs in a worktree first — never modify the working tree directly.
 - The agent validates as if it were going to push: run the full suite with coverage, typecheck, lint, and audit — not just `npm test`.
 - The agent commits its result to the worktree branch. If accepted, squash merge. Do not redo the work manually.
+- Multiple agents can run in parallel in separate worktrees — safe and encouraged.
+- **Main must not move while any worktree experiment is in flight.** Do not commit to main until all running experiments are merged or abandoned.
 
 ## Architecture
 

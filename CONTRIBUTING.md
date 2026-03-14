@@ -87,6 +87,12 @@ isolated worktree first — never applied directly to the working tree. The agen
 its result to the worktree branch. If the experiment succeeds, squash merge the branch.
 Do not redo the work manually.
 
+Multiple agents can run in parallel, each in their own worktree branch — this is safe
+and encouraged. However, **main must not move while any worktree experiment is in
+flight**. Do not commit directly to main until all running experiments have been merged
+or abandoned. Violating this causes merge conflicts on squash merge, even though the
+worktree isolation itself is sound.
+
 ### Code Review
 
 Reviews enforce this working agreement. Reviewers should check:
