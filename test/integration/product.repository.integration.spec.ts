@@ -1,27 +1,21 @@
-import './setup';
 import { DataSource } from 'typeorm';
-import { PostgreSqlContainer, StartedPostgreSqlContainer } from '@testcontainers/postgresql';
 import { IProductRepository } from '../../src/domain/product/product.repository';
 import { Product } from '../../src/domain/product/product';
 import { ProductEntity } from '../../src/infrastructure/persistence/typeorm/entities/product.entity';
 import { TypeOrmProductRepository } from '../../src/infrastructure/persistence/typeorm/typeorm-product.repository';
 
-jest.setTimeout(60000);
-
 describe('TypeOrmProductRepository (integration)', () => {
-  let container: StartedPostgreSqlContainer;
   let dataSource: DataSource;
   let repository: IProductRepository;
 
   beforeAll(async () => {
-    container = await new PostgreSqlContainer('postgres:16').start();
     dataSource = new DataSource({
       type: 'postgres',
-      host: container.getHost(),
-      port: container.getPort(),
-      username: container.getUsername(),
-      password: container.getPassword(),
-      database: container.getDatabase(),
+      host: process.env['INTEGRATION_DB_HOST'],
+      port: Number(process.env['INTEGRATION_DB_PORT']),
+      username: process.env['INTEGRATION_DB_USER'],
+      password: process.env['INTEGRATION_DB_PASSWORD'],
+      database: process.env['INTEGRATION_DB_NAME'],
       entities: [ProductEntity],
       synchronize: true,
     });
@@ -31,7 +25,6 @@ describe('TypeOrmProductRepository (integration)', () => {
 
   afterAll(async () => {
     await dataSource.destroy();
-    await container.stop();
   });
 
   beforeEach(async () => {

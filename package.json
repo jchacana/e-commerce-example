@@ -102,7 +102,8 @@
         "transform": { "^.+\\.(t|j)s$": "ts-jest" },
         "testEnvironment": "node",
         "roots": ["<rootDir>/test/integration/"],
-        "setupFiles": ["<rootDir>/test/setup.ts"]
+        "globalSetup": "<rootDir>/test/integration/global-setup.ts",
+        "globalTeardown": "<rootDir>/test/integration/global-teardown.ts"
       }
     ]
   },

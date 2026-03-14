@@ -1,28 +1,22 @@
-import './setup';
 import { DataSource } from 'typeorm';
-import { PostgreSqlContainer, StartedPostgreSqlContainer } from '@testcontainers/postgresql';
 import { IOrderRepository } from '../../src/domain/order/order.repository';
 import { Order, OrderItem } from '../../src/domain/order/order';
 import { OrderEntity } from '../../src/infrastructure/persistence/typeorm/entities/order.entity';
 import { OrderItemEntity } from '../../src/infrastructure/persistence/typeorm/entities/order-item.entity';
 import { TypeOrmOrderRepository } from '../../src/infrastructure/persistence/typeorm/typeorm-order.repository';
 
-jest.setTimeout(60000);
-
 describe('TypeOrmOrderRepository (integration)', () => {
-  let container: StartedPostgreSqlContainer;
   let dataSource: DataSource;
   let repository: IOrderRepository;
 
   beforeAll(async () => {
-    container = await new PostgreSqlContainer('postgres:16').start();
     dataSource = new DataSource({
       type: 'postgres',
-      host: container.getHost(),
-      port: container.getPort(),
-      username: container.getUsername(),
-      password: container.getPassword(),
-      database: container.getDatabase(),
+      host: process.env['INTEGRATION_DB_HOST'],
+      port: Number(process.env['INTEGRATION_DB_PORT']),
+      username: process.env['INTEGRATION_DB_USER'],
+      password: process.env['INTEGRATION_DB_PASSWORD'],
+      database: process.env['INTEGRATION_DB_NAME'],
       entities: [OrderEntity, OrderItemEntity],
       synchronize: true,
     });
@@ -32,7 +26,6 @@ describe('TypeOrmOrderRepository (integration)', () => {
 
   afterAll(async () => {
     await dataSource.destroy();
-    await container.stop();
   });
 
   beforeEach(async () => {
