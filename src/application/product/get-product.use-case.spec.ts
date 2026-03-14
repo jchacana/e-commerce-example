@@ -1,27 +1,22 @@
 import { GetProductUseCase } from './get-product.use-case';
-import { IProductRepository } from '../../domain/product/product.repository';
+import { InMemoryProductRepository } from '../../infrastructure/persistence/in-memory/in-memory-product.repository';
 import { Product } from '../../domain/product/product';
 
 describe('GetProductUseCase', () => {
   let useCase: GetProductUseCase;
-  let mockRepository: jest.Mocked<IProductRepository>;
+  let repository: InMemoryProductRepository;
 
   beforeEach(() => {
-    mockRepository = {
-      save: jest.fn(),
-      findById: jest.fn(),
-      findAll: jest.fn(),
-    };
-    useCase = new GetProductUseCase(mockRepository);
+    repository = new InMemoryProductRepository();
+    useCase = new GetProductUseCase(repository);
   });
 
-  it('returns the product from the repository by id', async () => {
-    const product = Product.create('1', 'Gadget', 19.99);
-    mockRepository.findById.mockResolvedValue(product);
+  it('returns the product with the given id', async () => {
+    await repository.save(Product.create('1', 'Gadget', 19.99));
 
     const result = await useCase.execute('1');
 
-    expect(mockRepository.findById).toHaveBeenCalledWith('1');
-    expect(result).toBe(product);
+    expect(result?.name).toBe('Gadget');
+    expect(result?.price).toBe(19.99);
   });
 });
