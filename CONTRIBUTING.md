@@ -96,22 +96,31 @@ Reviews enforce this working agreement. Reviewers should check:
 
 ## Architecture
 
-Hexagonal architecture. Full inventory of implemented slices in
-[`docs/architecture.md`](docs/architecture.md).
+This project uses Clean Architecture layering inside a Hexagonal (Ports and Adapters)
+boundary. Full rationale in [`docs/adr/ADR-001.md`](docs/adr/ADR-001.md).
 
 ```
 src/
 ├── domain/         # Pure business logic. No framework dependencies.
-├── application/    # Use cases. One file per action.
-└── infrastructure/ # NestJS, HTTP controllers, persistence.
+│                   # Repository interfaces (driven ports) live here.
+├── application/    # Use cases. Orchestrate domain via repository interfaces.
+└── infrastructure/ # Adapters — HTTP controllers (driving), persistence (driven).
 
 test/
 └── acceptance/     # End-to-end HTTP tests (Supertest)
 ```
 
+**Ports and Adapters:**
+- *Driven ports* — repository interfaces in `domain` (e.g. `IProductRepository`).
+  The application calls out through these; infrastructure provides the implementations.
+- *Driving adapters* — HTTP controllers translate external requests into use case calls.
+- *Driving-side port interfaces* — intentionally omitted. See [ADR-002](docs/adr/ADR-002.md).
+
 Boundaries enforced automatically by dependency-cruiser:
 - `domain` must not import from `infrastructure` or `application`
 - `application` must not import from `infrastructure/http`
+
+Full inventory of implemented slices in [`docs/architecture.md`](docs/architecture.md).
 
 ## Local Setup
 

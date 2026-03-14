@@ -28,6 +28,9 @@ These apply to every AI assistant working in this codebase, every session.
 
 ## Architecture
 
+Architecture decisions are recorded in [`docs/adr/`](docs/adr/).
+See [ADR-001](docs/adr/ADR-001.md) (architecture style) and [ADR-002](docs/adr/ADR-002.md) (driving-side ports).
+
 Outside-in layered architecture following hexagonal principles:
 
 ```
