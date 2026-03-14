@@ -27,3 +27,6 @@ coverage/
 
 # TypeScript incremental
 *.tsbuildinfo
+
+# Claude Code worktrees
+.claude/worktrees/
