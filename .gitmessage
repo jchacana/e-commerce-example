@@ -1,0 +1,5 @@
+# <type>: <description>
+# Types: feat | fix | chore | refactor | test | docs
+# Imperative mood, present tense: "add login" not "added login"
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>

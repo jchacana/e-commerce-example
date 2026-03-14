@@ -9,7 +9,7 @@
     "lint": "eslint \"{src,test}/**/*.ts\"",
     "lint:fix": "eslint \"{src,test}/**/*.ts\" --fix",
     "audit": "npm audit --audit-level=high --omit=dev",
-    "prepare": "husky",
+    "prepare": "husky && git config commit.template .gitmessage",
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "test:cov": "jest --coverage",
