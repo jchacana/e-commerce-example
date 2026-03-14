@@ -25,6 +25,7 @@ describe('Products (acceptance)', () => {
   });
 
   describe('POST /products', () => {
+    // Covers: create-product AC-001
     it('creates a product and returns 201 with the persisted resource', async () => {
       await request(app.getHttpServer())
         .post('/products')
@@ -37,6 +38,7 @@ describe('Products (acceptance)', () => {
         });
     });
 
+    // Covers: create-product AC-002
     it('returns 400 when name is missing', async () => {
       await request(app.getHttpServer())
         .post('/products')
@@ -44,6 +46,7 @@ describe('Products (acceptance)', () => {
         .expect(400);
     });
 
+    // Covers: create-product AC-003
     it('returns 400 when price is not positive', async () => {
       await request(app.getHttpServer())
         .post('/products')
@@ -53,7 +56,7 @@ describe('Products (acceptance)', () => {
   });
 
   describe('GET /products', () => {
-    // SC-002
+    // Covers: get-products AC-002
     it('returns 200 with an empty array when no products exist', async () => {
       const freshApp = await buildApp();
 
@@ -67,7 +70,7 @@ describe('Products (acceptance)', () => {
       await freshApp.close();
     });
 
-    // SC-001
+    // Covers: get-products AC-001
     it('returns 200 with all products', async () => {
       const { body: created } = await request(app.getHttpServer())
         .post('/products')
@@ -88,14 +91,14 @@ describe('Products (acceptance)', () => {
   });
 
   describe('GET /products/:id', () => {
-    // SC-004
+    // Covers: get-products AC-004
     it('returns 404 when the product does not exist', async () => {
       await request(app.getHttpServer())
         .get('/products/nonexistent-id')
         .expect(404);
     });
 
-    // SC-003
+    // Covers: get-products AC-003
     it('returns 200 with the product when it exists', async () => {
       const { body: created } = await request(app.getHttpServer())
         .post('/products')

@@ -3,16 +3,6 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../../src/app.module';
 
-/**
- * RED — these tests drive your first outside-in TDD cycle for the Orders slice.
- *
- * Cycle:
- *   1. Run: npm run test:acceptance  → see 404 here
- *   2. Unit-test OrderController (RED) → implement (GREEN)
- *   3. Unit-test PlaceOrderUseCase (RED) → implement (GREEN)
- *   4. Wire OrderModule into AppModule
- *   5. Run: npm run test:acceptance  → GREEN ✓
- */
 describe('Orders (acceptance)', () => {
   let app: INestApplication;
 
@@ -31,7 +21,7 @@ describe('Orders (acceptance)', () => {
   });
 
   describe('POST /orders', () => {
-    // Covers: US1, FR-001..005, SC-001
+    // Covers: place-order AC-001
     it('places an order and returns 201 with the persisted resource', async () => {
       await request(app.getHttpServer())
         .post('/orders')
@@ -49,7 +39,7 @@ describe('Orders (acceptance)', () => {
         });
     });
 
-    // Covers: US2, FR-006, SC-002
+    // Covers: place-order AC-002
     it('returns 400 when customerId is missing', async () => {
       await request(app.getHttpServer())
         .post('/orders')
@@ -57,7 +47,7 @@ describe('Orders (acceptance)', () => {
         .expect(400);
     });
 
-    // Covers: US2, FR-007, SC-003
+    // Covers: place-order AC-003
     it('returns 400 when items list is empty', async () => {
       await request(app.getHttpServer())
         .post('/orders')
