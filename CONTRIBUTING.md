@@ -62,7 +62,9 @@ Follow the outside-in TDD cycle:
    - Controller → unit test with mocked use case
    - Use case → unit test with mocked repository
    - Domain → pure unit test, no mocks needed
-4. Each layer: failing test → minimum production code → green → refactor
+4. Each layer: failing test → minimum production code → green → refactor.
+   For use case tests specifically: once green, replace repository mocks with
+   real in-memory implementations and assert on state. See [ADR-003](docs/adr/ADR-003.md).
 5. Acceptance test goes GREEN → commit
 6. Repeat per scenario
 

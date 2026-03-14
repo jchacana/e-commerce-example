@@ -64,7 +64,7 @@ test/
 - One file per use case, named `<verb>-<noun>.use-case.ts`.
 - Use cases receive repository interfaces via constructor injection.
 - No HTTP, no response shaping, no framework logic.
-- Tests: unit tests. **Mock all repository collaborators** (London school). Verify interactions.
+- Tests: two phases. During RED→GREEN, mock repository collaborators (London school) to drive the design. On GREEN, refactor to inject real in-memory repositories and assert on state (Classic school). See [ADR-003](docs/adr/ADR-003.md).
 
 ### Infrastructure — HTTP (`src/infrastructure/http/`)
 - One controller per domain aggregate.
