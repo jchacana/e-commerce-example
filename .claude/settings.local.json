@@ -2,7 +2,18 @@
   "permissions": {
     "allow": [
       "Bash(npx husky:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(npm show:*)",
+      "Bash(npm install:*)",
+      "Bash(npm ci:*)",
+      "WebFetch(domain:docs.nestjs.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npm audit:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm run:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git merge:*)"
     ]
   }
 }
