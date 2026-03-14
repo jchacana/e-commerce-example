@@ -14,8 +14,9 @@
     "test": "jest",
     "test:cov": "jest --coverage",
     "test:watch": "jest --watch",
-    "test:acceptance": "jest --testPathPatterns=acceptance --runInBand",
-    "test:unit": "jest --testPathIgnorePatterns=acceptance --runInBand",
+    "test:unit": "jest --selectProjects unit --runInBand",
+    "test:acceptance": "jest --selectProjects acceptance --runInBand",
+    "test:integration": "jest --selectProjects integration --runInBand",
     "secretlint": "secretlint --secretlintrc .secretlintrc.json \"**/*\"",
     "arch:check": "depcruise src --config .dependency-cruiser.cjs"
   },
@@ -55,25 +56,8 @@
     "typescript": "^5.3.0"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
     "rootDir": ".",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
     "coverageDirectory": "./coverage",
-    "testEnvironment": "node",
-    "roots": [
-      "<rootDir>/src/",
-      "<rootDir>/test/"
-    ],
-    "setupFiles": [
-      "<rootDir>/test/setup.ts"
-    ],
     "collectCoverageFrom": [
       "src/**/*.ts",
       "!src/main.ts"
@@ -85,7 +69,36 @@
         "branches": 80,
         "functions": 80
       }
-    }
+    },
+    "projects": [
+      {
+        "displayName": "unit",
+        "moduleFileExtensions": ["js", "json", "ts"],
+        "testRegex": ".*\\.spec\\.ts$",
+        "transform": { "^.+\\.(t|j)s$": "ts-jest" },
+        "testEnvironment": "node",
+        "roots": ["<rootDir>/src/"],
+        "setupFiles": ["<rootDir>/test/setup.ts"]
+      },
+      {
+        "displayName": "acceptance",
+        "moduleFileExtensions": ["js", "json", "ts"],
+        "testRegex": ".*\\.spec\\.ts$",
+        "transform": { "^.+\\.(t|j)s$": "ts-jest" },
+        "testEnvironment": "node",
+        "roots": ["<rootDir>/test/acceptance/"],
+        "setupFiles": ["<rootDir>/test/setup.ts"]
+      },
+      {
+        "displayName": "integration",
+        "moduleFileExtensions": ["js", "json", "ts"],
+        "testRegex": ".*\\.spec\\.ts$",
+        "transform": { "^.+\\.(t|j)s$": "ts-jest" },
+        "testEnvironment": "node",
+        "roots": ["<rootDir>/test/integration/"],
+        "setupFiles": ["<rootDir>/test/setup.ts"]
+      }
+    ]
   },
   "overrides": {
     "multer": "2.1.1"
