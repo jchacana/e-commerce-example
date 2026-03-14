@@ -21,7 +21,14 @@ Deprecation warnings that appear on `npm ci` with no actionable fix path:
 - `glob@7` (×1) + `inflight` — via `babel-plugin-istanbul` → `test-exclude`, a jest internal. Will clear when jest updates `babel-plugin-istanbul` or `test-exclude` to use a newer glob.
 - `glob@10.4.5` — via `@nestjs/cli`. Will clear when `@nestjs/cli` updates its dependency tree.
 
-`npm audit --audit-level=high --omit=dev` is clean. These are dev-only and cosmetic.
+`npm audit --audit-level=critical --omit=dev` is clean. These are dev-only and cosmetic.
+
+## Known Vulnerabilities (no direct fix available)
+
+High-severity CVEs in production dependencies with no non-breaking fix path. Audit gate lowered to `--critical` until resolved.
+
+- **GHSA-5528-5vmv-3xc2** (`multer < 2.1.1`) — DoS via uncontrolled recursion. Fix requires `@nestjs/platform-express@11` (breaking). Tracked for next NestJS major upgrade.
+- **GHSA-5v7r-6r5c-r473** / **GHSA-j47w-4g3g-c36v** (`file-type`) — infinite loop / ZIP decompression bomb via `@nestjs/common`. No direct fix; awaiting NestJS upstream resolution.
 
 ## Planned
 

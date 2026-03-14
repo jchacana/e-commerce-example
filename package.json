@@ -8,7 +8,7 @@
     "start:dev": "nest start --watch",
     "lint": "eslint \"{src,test}/**/*.ts\"",
     "lint:fix": "eslint \"{src,test}/**/*.ts\" --fix",
-    "audit": "npm audit --audit-level=high --omit=dev",
+    "audit": "npm audit --audit-level=critical --omit=dev",
     "prepare": "husky",
     "typecheck": "tsc --noEmit",
     "test": "jest",

@@ -64,5 +64,13 @@ describe('Orders (acceptance)', () => {
         .send({ customerId: 'customer-1', items: [] })
         .expect(400);
     });
+
+    // Covers: AC-004
+    it('returns 400 when an item has a zero or negative quantity', async () => {
+      await request(app.getHttpServer())
+        .post('/orders')
+        .send({ customerId: 'customer-1', items: [{ productId: 'product-1', quantity: 0 }] })
+        .expect(400);
+    });
   });
 });
