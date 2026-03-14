@@ -93,6 +93,10 @@ flight**. Do not commit directly to main until all running experiments have been
 or abandoned. Violating this causes merge conflicts on squash merge, even though the
 worktree isolation itself is sound.
 
+Never resume a worktree agent after main has moved. If a fix is needed post-review,
+start a fresh agent from the current main. Once a worktree is squash merged and
+deleted, it is gone — never resume it.
+
 ### Code Review
 
 Reviews enforce this working agreement. Reviewers should check:
