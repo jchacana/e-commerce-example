@@ -15,9 +15,13 @@ Acceptance scenarios:
 - When the client requests all products
 - Then an empty list is returned
 
+---
+
 - Given one or more products exist
 - When the client requests all products
 - Then all products are returned
+
+---
 
 **US2 — Client retrieves a single product**
 > As a client, I want to fetch a product by its ID
@@ -28,28 +32,19 @@ Acceptance scenarios:
 - When the client requests it by ID
 - Then the product is returned
 
+---
+
 - Given no product with the requested ID exists
 - When the client requests it by ID
 - Then the request is rejected
 
 ---
 
-## Functional Requirements
+## Acceptance Criteria
 
-| ID     | Requirement |
-|--------|-------------|
-| FR-001 | `GET /products` MUST return a list of all persisted products |
-| FR-002 | `GET /products` MUST return an empty list when no products exist |
-| FR-003 | `GET /products/:id` MUST return the product with the given ID |
-| FR-004 | `GET /products/:id` MUST be rejected when no product with that ID exists |
-
----
-
-## Success Criteria
-
-| ID     | Criterion |
-|--------|-----------|
-| SC-001 | `GET /products` returns 200 with all products |
-| SC-002 | `GET /products` returns 200 with an empty array when none exist |
-| SC-003 | `GET /products/:id` returns 200 with the matching product |
-| SC-004 | `GET /products/:id` returns a client error when the product does not exist |
+| ID | Criterion |
+|----|-----------|
+| AC-001 | All products are returned when a list is requested |
+| AC-002 | An empty list is returned when no products exist |
+| AC-003 | The requested product is returned when it exists |
+| AC-004 | The request is rejected when no product with that ID exists |
