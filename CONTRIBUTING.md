@@ -156,8 +156,23 @@ npm run start:dev
 ```sh
 npm run test:unit        # unit tests only — use this during TDD loops
 npm run test:acceptance  # acceptance tests only
+npm run test:integration # integration tests (requires Docker — see below)
 npm test                 # full suite with coverage
 ```
+
+#### Integration tests — Docker setup
+
+Integration tests use [Testcontainers](https://testcontainers.com/) to spin up a real PostgreSQL instance. Docker must be running and Testcontainers must be able to find it.
+
+**Docker Desktop** — no extra configuration needed.
+
+**Colima** — create `~/.testcontainers.properties` with the socket path:
+
+```
+docker.host=unix:///Users/<your-username>/.colima/docker.sock
+```
+
+Substitute your actual username. Testcontainers reads this file automatically.
 
 ### Quality gates (enforced automatically at pre-commit / pre-push / CI)
 
