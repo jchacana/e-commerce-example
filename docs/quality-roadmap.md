@@ -29,6 +29,13 @@ Moderate-severity CVEs in production dependencies with no actionable fix path:
 
 - **GHSA-5v7r-6r5c-r473** / **GHSA-j47w-4g3g-c36v** (`file-type`) — infinite loop / ZIP decompression bomb via `@nestjs/common >= 11.0.16`. No direct fix; awaiting NestJS upstream resolution. Audit gate remains at `--audit-level=high` (these are moderate only).
 
+## Backlog
+
+### Knip false positives — unused dependency findings
+Knip reports `@nestjs/typeorm` (dependency) and `testcontainers` (devDependency) as unused.
+Both are likely false positives due to indirect usage patterns. Investigate and either
+fix the imports, add to `ignoreDependencies` in `knip.json`, or remove if genuinely unused.
+
 ## Planned
 
 ### Stryker — mutation testing
