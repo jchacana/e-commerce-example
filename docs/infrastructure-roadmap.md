@@ -50,7 +50,7 @@ Relevant when the in-memory repositories are replaced with a real persistence la
 (TypeORM + PostgreSQL). Compose spins up a clean, isolated PostgreSQL instance for the
 acceptance test suite.
 
-**Impact on the tdd-feature cycle:** the acceptance layer setup would extend to:
+**Impact on the crafter cycle:** the acceptance layer setup would extend to:
 ```
 beforeAll: docker compose up db → buildApp()
 afterAll:  app.close() → docker compose down

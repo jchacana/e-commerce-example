@@ -1,5 +1,5 @@
 ---
-name: tdd-feature
+name: crafter
 description: Outside-in TDD cycle for this project — load when implementing a new feature or aggregate slice
 ---
 
