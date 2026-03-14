@@ -166,13 +166,21 @@ Integration tests use [Testcontainers](https://testcontainers.com/) to spin up a
 
 **Docker Desktop** — no extra configuration needed.
 
-**Colima** — create `~/.testcontainers.properties` with the socket path:
+**Colima** — two one-time steps:
+
+1. Create `~/.testcontainers.properties` so Testcontainers can find Docker:
 
 ```
 docker.host=unix:///Users/<your-username>/.colima/docker.sock
 ```
 
-Substitute your actual username. Testcontainers reads this file automatically.
+2. Export `TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE` in your shell (`.zshrc`, `.envrc`, etc.) so Ryuk mounts the in-VM socket path rather than the macOS host path:
+
+```sh
+export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+```
+
+Substitute your actual username in step 1. Neither file is committed to the repo.
 
 ### Quality gates (enforced automatically at pre-commit / pre-push / CI)
 
