@@ -12,7 +12,7 @@
 - Secretlint — scans all staged files for credential patterns on pre-commit and CI; `.env.example` excluded via `.secretlintignore`
 - commitlint — enforces conventional commit format (`feat:`, `fix:`, `chore:`, etc.) on `commit-msg` hook
 - dependency-cruiser — static import graph rules; three forbidden boundary rules enforced at pre-commit and CI
-- knip — unused files, exports, and dependencies; CI only; `src/**/*.dto.ts` treated as entry points to avoid decorator false positives
+- knip — unused files, exports, and dependencies; pre-push and CI; `src/**/*.dto.ts` treated as entry points to avoid decorator false positives; `@nestjs/typeorm` and `testcontainers` added to `ignoreDependencies` (indirect usage, not false positives)
 
 ## Known Warnings (no direct fix available)
 
@@ -28,13 +28,6 @@ Deprecation warnings that appear on `npm ci` with no actionable fix path:
 Moderate-severity CVEs in production dependencies with no actionable fix path:
 
 - **GHSA-5v7r-6r5c-r473** / **GHSA-j47w-4g3g-c36v** (`file-type`) — infinite loop / ZIP decompression bomb via `@nestjs/common >= 11.0.16`. No direct fix; awaiting NestJS upstream resolution. Audit gate remains at `--audit-level=high` (these are moderate only).
-
-## Backlog
-
-### Knip false positives — unused dependency findings
-Knip reports `@nestjs/typeorm` (dependency) and `testcontainers` (devDependency) as unused.
-Both are likely false positives due to indirect usage patterns. Investigate and either
-fix the imports, add to `ignoreDependencies` in `knip.json`, or remove if genuinely unused.
 
 ## Planned
 

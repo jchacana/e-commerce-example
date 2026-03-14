@@ -1,2 +1,3 @@
 #!/bin/sh
+npx knip                 # unused files, exports, and dependencies
 npm run test:cov         # full suite with coverage thresholds
