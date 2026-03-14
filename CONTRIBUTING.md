@@ -182,6 +182,8 @@ export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
 
 Substitute your actual username in step 1. Neither file is committed to the repo.
 
+**GUI applications (IntelliJ, etc.):** If the pre-push hook fails with a Docker socket error, the most likely cause is that `DOCKER_HOST` and `TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE` are not in the process environment. Set them directly in `.zshrc` (before the `direnv` hook line) to ensure they are available regardless of how the application is launched.
+
 ### Quality gates (enforced automatically at pre-commit / pre-push / CI)
 
 ```sh
