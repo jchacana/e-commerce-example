@@ -12,11 +12,7 @@ describe('TypeOrmOrderRepository (integration)', () => {
   beforeAll(async () => {
     dataSource = new DataSource({
       type: 'postgres',
-      host: process.env['INTEGRATION_DB_HOST'],
-      port: Number(process.env['INTEGRATION_DB_PORT']),
-      username: process.env['INTEGRATION_DB_USER'],
-      password: process.env['INTEGRATION_DB_PASSWORD'],
-      database: process.env['INTEGRATION_DB_NAME'],
+      url: process.env['INTEGRATION_DB_URL'],
       entities: [OrderEntity, OrderItemEntity],
       synchronize: true,
     });
