@@ -118,6 +118,8 @@ Common types: `feat`, `fix`, `chore`, `refactor`, `test`, `docs`. Description in
 **Implementing a new feature or aggregate slice**: invoke the `tdd-feature` skill before
 writing any code. Do not begin implementation without it.
 
+**Writing a spec**: read `docs/specs/SPEC-TEMPLATE.md` before writing any spec. All specs must follow that format.
+
 **Specs live in `docs/specs/`**. Read that directory before speccing any feature. If no spec
 exists for the feature, draft one in the established format and write it there before proceeding.
 
