@@ -1,10 +1,11 @@
 import { GetProductUseCase } from './get-product.use-case';
+import { IProductRepository } from '../../domain/product/product.repository';
 import { InMemoryProductRepository } from '../../infrastructure/persistence/in-memory/in-memory-product.repository';
 import { Product } from '../../domain/product/product';
 
 describe('GetProductUseCase', () => {
   let useCase: GetProductUseCase;
-  let repository: InMemoryProductRepository;
+  let repository: IProductRepository;
 
   beforeEach(() => {
     repository = new InMemoryProductRepository();

@@ -1,10 +1,11 @@
 import { CreateProductUseCase } from './create-product.use-case';
 import { CreateProductCommand } from './create-product.command';
+import { IProductRepository } from '../../domain/product/product.repository';
 import { InMemoryProductRepository } from '../../infrastructure/persistence/in-memory/in-memory-product.repository';
 
 describe('CreateProductUseCase', () => {
   let useCase: CreateProductUseCase;
-  let repository: InMemoryProductRepository;
+  let repository: IProductRepository;
 
   beforeEach(() => {
     repository = new InMemoryProductRepository();

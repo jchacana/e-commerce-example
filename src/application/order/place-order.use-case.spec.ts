@@ -1,10 +1,11 @@
 import { PlaceOrderUseCase } from './place-order.use-case';
 import { PlaceOrderCommand } from './place-order.command';
+import { IOrderRepository } from '../../domain/order/order.repository';
 import { InMemoryOrderRepository } from '../../infrastructure/persistence/in-memory/in-memory-order.repository';
 
 describe('PlaceOrderUseCase', () => {
   let useCase: PlaceOrderUseCase;
-  let repository: InMemoryOrderRepository;
+  let repository: IOrderRepository;
 
   beforeEach(() => {
     repository = new InMemoryOrderRepository();
