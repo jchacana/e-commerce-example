@@ -1,0 +1,66 @@
+name: Mutation Testing
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  mutation-weekly:
+    name: Full mutation run (weekly baseline reset)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .tool-versions
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run mutation tests (full)
+        run: npx stryker run
+
+  mutation-pr:
+    name: Incremental mutation run (PR)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .tool-versions
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore Stryker incremental cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .stryker-tmp/incremental.json
+          key: stryker-incremental-${{ github.head_ref }}
+          restore-keys: stryker-incremental-
+
+      - name: Run mutation tests (incremental)
+        run: npx stryker run --incremental
+
+      - name: Save Stryker incremental cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .stryker-tmp/incremental.json
+          key: stryker-incremental-${{ github.head_ref }}

@@ -17,6 +17,7 @@ npm-debug.log*
 
 # Test
 coverage/
+.stryker-tmp/
 
 # IDE
 .idea/

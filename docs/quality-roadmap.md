@@ -13,6 +13,7 @@
 - commitlint — enforces conventional commit format (`feat:`, `fix:`, `chore:`, etc.) on `commit-msg` hook
 - dependency-cruiser — static import graph rules; three forbidden boundary rules enforced at pre-commit and CI
 - knip — unused files, exports, and dependencies; pre-push and CI; `src/**/*.dto.ts` treated as entry points to avoid decorator false positives; `@nestjs/typeorm` and `testcontainers` added to `ignoreDependencies` (indirect usage, not false positives)
+- Stryker mutation testing — validates test quality on `src/domain/**` (pure business logic); incremental mode on PRs (fast, caches results keyed on branch name); full weekly scheduled run resets the baseline; mutation score 100% at initial setup; HTML report written to `.stryker-tmp/reports/mutation/mutation.html`; thresholds: high 80 / low 60 / break 50
 
 ## Known Warnings (no direct fix available)
 
@@ -30,17 +31,6 @@ Moderate-severity CVEs in production dependencies with no actionable fix path:
 - **GHSA-5v7r-6r5c-r473** / **GHSA-j47w-4g3g-c36v** (`file-type`) — infinite loop / ZIP decompression bomb via `@nestjs/common >= 11.0.16`. No direct fix; awaiting NestJS upstream resolution. Audit gate remains at `--audit-level=high` (these are moderate only).
 
 ## Planned
-
-### Stryker — mutation testing
-Validates test quality, not just coverage. Makes small mutations to production code (flips `>` to `>=`, deletes a `throw`, inverts a condition) and checks whether the test suite catches them. A surviving mutation means logic exists with no test asserting it.
-- Scope to start: `src/domain/` only — fast, high signal, directly tests TDD discipline on invariants
-- Wire into: scheduled CI job (weekly), not every push — it is slow
-- Implement after: Orders acceptance test is GREEN
-
-**Incremental mode**: Stryker supports `--incremental`, which caches results to `.stryker-tmp/incremental.json` and on subsequent runs only re-mutates files that changed, files whose tests changed, and previously surviving mutants. This makes PR-level runs fast after the first warm-up run.
-- Pair with GitHub Actions cache keyed on branch name or source file hash
-- Suggested split: PR runs use incremental mode (fast, targets what changed); weekly scheduled run uses full mode (no cache, resets the baseline)
-- For this project's small `src/domain/` scope, even full runs should be manageable — but incremental is still worth having as the codebase grows
 
 ### Renovate — automated dependency updates
 Opens PRs automatically when dependencies have updates; CI runs against each PR. Proactive complement to `npm audit` (which is reactive — fires only after a CVE is published).
