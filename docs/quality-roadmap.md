@@ -15,6 +15,8 @@
 - knip — unused files, exports, and dependencies; pre-push and CI; `src/**/*.dto.ts` treated as entry points to avoid decorator false positives; `@nestjs/typeorm` and `testcontainers` added to `ignoreDependencies` (indirect usage, not false positives)
 - Stryker mutation testing — validates test quality on `src/domain/**` (pure business logic); incremental mode on PRs (fast, caches results keyed on branch name); full weekly scheduled run resets the baseline; mutation score 100% at initial setup; HTML report written to `.stryker-tmp/reports/mutation/mutation.html`; thresholds: high 80 / low 60 / break 80. **Guarantee strategy**: (1) `crafter` skill runs `npm run mutation` locally after any new domain behaviour and requires 0 surviving mutants before committing; (2) the PR mutation CI check should be set as a required status check in GitHub branch protection rules for `main` — this ensures nothing merges with surviving mutants without adding overhead to local hooks
 - Prettier — consistent formatting enforced on `{src,test}/**/*.ts`; config: `.prettierrc` (tabs, 120 col width, single quotes, trailing commas `all`, semicolons); wired into lint-staged (format before ESLint) and CI format check step (`npm run format:check`)
+- OpenAPI / Swagger — `@nestjs/swagger` wired into `src/main.ts`; docs served at `/api/docs`
+- Health check — `GET /health` via `@nestjs/terminus`; returns `{ status: 'ok' }`; acceptance-tested
 
 ## Known Warnings (no direct fix available)
 
@@ -43,12 +45,6 @@ Opens PRs automatically when dependencies have updates; CI runs against each PR.
 
 ### `experiment` skill
 Formalise the worktree experiment pattern as a callable skill. The pattern is well-documented in CLAUDE.md and CONTRIBUTING.md but complex enough (main must not move, always commit, squash merge, never resume after main moves) to warrant a guided skill for agents.
-
-### OpenAPI / Swagger
-NestJS has first-class Swagger support (`@nestjs/swagger`). A self-documenting API is expected in client projects and complements the spec-driven workflow — spec + OpenAPI schema as two complementary artefacts.
-
-### Health check endpoint
-Standard for cloud/Kubernetes deployments. `@nestjs/terminus` provides a `GET /health` endpoint with minimal setup. First thing platform teams ask for. Worth adding to the scaffolding.
 
 ### Dev container
 `.devcontainer/devcontainer.json` for VS Code / GitHub Codespaces / Claude Code. Already on the infrastructure roadmap. Highest value for client transfers — eliminates onboarding friction entirely.
