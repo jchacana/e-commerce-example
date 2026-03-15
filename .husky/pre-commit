@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 npx lint-staged          # ESLint on staged .ts files
 npm run typecheck        # type errors block commit
 npm run arch:check       # architectural boundary violations block commit
