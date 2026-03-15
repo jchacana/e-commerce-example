@@ -10,6 +10,8 @@
   ],
   "ignoreDependencies": [
     "@secretlint/secretlint-rule-preset-recommend",
-    "testcontainers"
+    "@nestjs/typeorm",
+    "testcontainers",
+    "typeorm"
   ]
 }

@@ -1,3 +1,7 @@
 #!/bin/sh
+if ! git diff --quiet HEAD -- package.json package-lock.json; then
+  echo "package.json or package-lock.json has uncommitted changes — commit them before pushing"
+  exit 1
+fi
 npx knip                 # unused files, exports, and dependencies
 npm run test:cov         # full suite with coverage thresholds
