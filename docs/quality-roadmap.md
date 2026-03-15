@@ -41,8 +41,5 @@ Opens PRs automatically when dependencies have updates; CI runs against each PR.
 
 ## Backlog
 
-### Enable `strictBindCallApply`
-The remaining relaxed `tsconfig` flag from the NestJS CLI scaffold. Catches incorrect argument types passed to `.call()`, `.bind()`, and `.apply()`. Left for separate treatment — requires reviewing all usages before enabling.
-
 ### GitHub PR template
 Add `.github/pull_request_template.md` to enforce a checklist in team settings: spec reference, acceptance criteria coverage, tests green, architecture updated. High value for client project transfers.
