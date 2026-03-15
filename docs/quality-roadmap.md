@@ -7,7 +7,7 @@
 - Husky pre-commit: lint-staged → typecheck → test:unit → audit
 - Husky pre-push: full suite with coverage thresholds — catches coverage failures before CI
 - GitHub Actions CI: lint → typecheck → test (with coverage) → audit
-- Jest coverage thresholds: 80% lines/statements/branches/functions
+- Jest coverage thresholds: lines 95% / statements 95% / branches 85% / functions 95% (raised from 80% to reflect actual coverage)
 - `docs/specs/` — specs as source of truth before any feature implementation
 - Secretlint — scans all staged files for credential patterns on pre-commit and CI; `.env.example` excluded via `.secretlintignore`
 - commitlint — enforces conventional commit format (`feat:`, `fix:`, `chore:`, etc.) on `commit-msg` hook
@@ -45,9 +45,6 @@ Consistent formatting (indentation, trailing commas, line length). Eliminates fo
 - Decision needed: tabs or spaces, 80 or 120 column width
 
 ## Backlog
-
-### Raise coverage thresholds
-Current thresholds are 80% across all metrics, but actual coverage is ~99%. The floor should reflect reality to prevent silent regression. Raise all thresholds to 95% (leaving a small buffer) and update the quality-roadmap and quality skill accordingly.
 
 ### Tighten relaxed `tsconfig` flags
 Three flags were left at `false` from the NestJS CLI scaffold:
