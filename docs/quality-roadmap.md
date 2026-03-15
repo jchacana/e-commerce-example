@@ -13,7 +13,7 @@
 - commitlint — enforces conventional commit format (`feat:`, `fix:`, `chore:`, etc.) on `commit-msg` hook
 - dependency-cruiser — static import graph rules; three forbidden boundary rules enforced at pre-commit and CI
 - knip — unused files, exports, and dependencies; pre-push and CI; `src/**/*.dto.ts` treated as entry points to avoid decorator false positives; `@nestjs/typeorm` and `testcontainers` added to `ignoreDependencies` (indirect usage, not false positives)
-- Stryker mutation testing — validates test quality on `src/domain/**` (pure business logic); incremental mode on PRs (fast, caches results keyed on branch name); full weekly scheduled run resets the baseline; mutation score 100% at initial setup; HTML report written to `.stryker-tmp/reports/mutation/mutation.html`; thresholds: high 80 / low 60 / break 50
+- Stryker mutation testing — validates test quality on `src/domain/**` (pure business logic); incremental mode on PRs (fast, caches results keyed on branch name); full weekly scheduled run resets the baseline; mutation score 100% at initial setup; HTML report written to `.stryker-tmp/reports/mutation/mutation.html`; thresholds: high 80 / low 60 / break 50. **Guarantee strategy**: (1) `crafter` skill runs `npm run mutation` locally after any new domain behaviour and requires 0 surviving mutants before committing; (2) the PR mutation CI check should be set as a required status check in GitHub branch protection rules for `main` — this ensures nothing merges with surviving mutants without adding overhead to local hooks
 
 ## Known Warnings (no direct fix available)
 

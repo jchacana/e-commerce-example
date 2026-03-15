@@ -19,6 +19,7 @@ For each scenario, one at a time:
   → unit test domain (RED)        → implement domain (GREEN)  [skip if no new domain behaviour]
   → refactor (GREEN stays GREEN)
   → ACCEPTANCE (GREEN) ✓
+  → if new domain behaviour was introduced: run npm run mutation — confirm 0 surviving mutants
   → commit
 
 When all scenarios are GREEN:
@@ -33,3 +34,4 @@ Rules:
 - Show test output at every step (failure and green).
 - Ask before moving to the next layer.
 - Updating Current State and committing are part of the cycle — not optional.
+- If new domain behaviour was introduced, mutation score must be 0 surviving mutants before committing. This is not optional.
