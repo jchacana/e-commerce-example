@@ -41,13 +41,8 @@ Opens PRs automatically when dependencies have updates; CI runs against each PR.
 
 ## Backlog
 
-### Tighten relaxed `tsconfig` flags
-Three flags were left at `false` from the NestJS CLI scaffold:
-- `strictBindCallApply` — catches incorrect `call`/`apply`/`bind` usage
-- `noFallthroughCasesInSwitch` — prevents accidental fallthrough in switch statements
-- `forceConsistentCasingInFileNames` — prevents import casing bugs on case-insensitive file systems
-
-Enable all three. Low risk given current test coverage.
+### Enable `strictBindCallApply`
+The remaining relaxed `tsconfig` flag from the NestJS CLI scaffold. Catches incorrect argument types passed to `.call()`, `.bind()`, and `.apply()`. Left for separate treatment — requires reviewing all usages before enabling.
 
 ### GitHub PR template
 Add `.github/pull_request_template.md` to enforce a checklist in team settings: spec reference, acceptance criteria coverage, tests green, architecture updated. High value for client project transfers.
