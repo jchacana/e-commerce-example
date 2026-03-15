@@ -133,6 +133,8 @@ writing any code. Do not begin implementation without it.
 
 **Writing a spec**: invoke the `po` skill. Do not write a spec manually.
 
+> **Scope of specs**: specs are required for business features — any endpoint that encodes domain rules, invariants, or user-facing behaviour. Pure infrastructure endpoints (health checks, metrics, readiness probes) are exempt — they have no business rules and no user stories to capture.
+
 **Recording an architectural decision**: invoke the `architect` skill. Do not write an ADR manually.
 
 ## In Progress
