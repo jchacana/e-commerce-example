@@ -187,9 +187,11 @@ Substitute your actual username in step 1. Neither file is committed to the repo
 ### Quality gates (enforced automatically at pre-commit / pre-push / CI)
 
 ```sh
-npm run lint       # ESLint
-npm run typecheck  # TypeScript strict
-npm run arch:check # Hexagonal boundary enforcement
-npm run secretlint # Credential scan
-npm run audit      # npm audit (high severity, prod deps only)
+npm run lint          # ESLint
+npm run format        # Prettier (auto-fix); npm run format:check to check only
+npm run typecheck     # TypeScript strict
+npm run arch:check    # Hexagonal boundary enforcement
+npm run secretlint    # Credential scan
+npm run audit         # npm audit (high severity, prod deps only)
+npm run mutation      # Stryker mutation testing (domain only); run after any new domain behaviour
 ```

@@ -8,15 +8,24 @@ disable-model-invocation: true
 
 ```bash
 npx jest path/to/file.spec.ts --no-coverage   # single file — use during red/green loop
-npm test                   # full suite
-npm run test:acceptance    # acceptance layer only (outside-in entry point)
-npm run test:unit          # unit tests only
-npm run test:watch         # TDD watch mode
-npm run test:cov           # full suite + coverage report
-npm run typecheck          # tsc --noEmit — must pass before every commit
-npm run lint               # ESLint across src/ and test/
-npm run audit              # npm audit --audit-level=high --omit=dev
-npm run start:dev          # local dev server (uses in-memory repos)
+npm test                    # full suite
+npm run test:acceptance     # acceptance layer only (outside-in entry point)
+npm run test:unit           # unit tests only
+npm run test:integration    # integration tests only (requires Docker)
+npm run test:watch          # TDD watch mode
+npm run test:cov            # full suite + coverage report
+
+npm run typecheck           # tsc --noEmit — must pass before every commit
+npm run lint                # ESLint across src/ and test/
+npm run lint:fix            # ESLint with auto-fix
+npm run format              # Prettier format all src/test files
+npm run format:check        # Prettier check (used in CI)
+npm run arch:check          # hexagonal boundary enforcement
+npm run audit               # npm audit --audit-level=high --omit=dev
+npm run mutation            # Stryker full run (domain only)
+npm run mutation:ci         # Stryker incremental run (domain only)
+
+npm run start:dev           # local dev server (uses in-memory repos)
 ```
 
 ## Environment Setup (first time)
