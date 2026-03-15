@@ -28,6 +28,7 @@
     "@nestjs/common": "^11.1.16",
     "@nestjs/core": "^11.1.16",
     "@nestjs/platform-express": "^11.1.16",
+    "@nestjs/swagger": "^11.2.6",
     "@nestjs/typeorm": "^11.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
@@ -149,6 +150,9 @@
   },
   "lint-staged": {
     "**/*": "secretlint --secretlintrc .secretlintrc.json",
-    "{src,test}/**/*.ts": ["prettier --write", "eslint --max-warnings=0"]
+    "{src,test}/**/*.ts": [
+      "prettier --write",
+      "eslint --max-warnings=0"
+    ]
   }
 }
