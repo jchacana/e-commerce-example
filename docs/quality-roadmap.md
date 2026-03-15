@@ -41,6 +41,14 @@ Opens PRs automatically when dependencies have updates; CI runs against each PR.
 - Group strategy: patch/minor together, major separate
 - Wire into: GitHub App (no local tooling needed)
 
+## Pending (manual action required)
+
+- **GitHub branch protection** — set the `mutation-pr` CI check as a required status check on `main`. Prevents merging with surviving mutants without adding overhead to local hooks. Must be done by repo owner in GitHub settings.
+
+## Pending (decision deferred)
+
+- **TypeORM layer** — `src/infrastructure/persistence/typeorm/` exists but is never wired into any module. Options: (a) keep as-is with `@nestjs/typeorm` in `knip.json` ignoreDependencies, or (b) delete the layer (YAGNI — no test drives it). Knip configuration hints will persist until resolved.
+
 ## Backlog
 
 ### `experiment` skill
