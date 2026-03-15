@@ -7,15 +7,15 @@ import { InMemoryProductRepository } from './persistence/in-memory/in-memory-pro
 import { PRODUCT_REPOSITORY } from '../domain/product/product.repository';
 
 @Module({
-  controllers: [ProductController],
-  providers: [
-    CreateProductUseCase,
-    GetAllProductsUseCase,
-    GetProductUseCase,
-    {
-      provide: PRODUCT_REPOSITORY,
-      useClass: InMemoryProductRepository,
-    },
-  ],
+	controllers: [ProductController],
+	providers: [
+		CreateProductUseCase,
+		GetAllProductsUseCase,
+		GetProductUseCase,
+		{
+			provide: PRODUCT_REPOSITORY,
+			useClass: InMemoryProductRepository,
+		},
+	],
 })
 export class ProductModule {}

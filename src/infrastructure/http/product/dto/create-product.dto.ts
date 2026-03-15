@@ -1,10 +1,10 @@
 import { IsNotEmpty, IsPositive, IsString } from 'class-validator';
 
 export class CreateProductDto {
-  @IsString()
-  @IsNotEmpty()
-  name!: string;
+	@IsString()
+	@IsNotEmpty()
+	name!: string;
 
-  @IsPositive()
-  price!: number;
+	@IsPositive()
+	price!: number;
 }

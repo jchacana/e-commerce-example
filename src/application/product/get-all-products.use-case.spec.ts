@@ -4,21 +4,21 @@ import { InMemoryProductRepository } from '../../infrastructure/persistence/in-m
 import { Product } from '../../domain/product/product';
 
 describe('GetAllProductsUseCase', () => {
-  let useCase: GetAllProductsUseCase;
-  let repository: IProductRepository;
+	let useCase: GetAllProductsUseCase;
+	let repository: IProductRepository;
 
-  beforeEach(() => {
-    repository = new InMemoryProductRepository();
-    useCase = new GetAllProductsUseCase(repository);
-  });
+	beforeEach(() => {
+		repository = new InMemoryProductRepository();
+		useCase = new GetAllProductsUseCase(repository);
+	});
 
-  it('returns all products in the repository', async () => {
-    await repository.save(Product.create('1', 'Widget', 9.99));
+	it('returns all products in the repository', async () => {
+		await repository.save(Product.create('1', 'Widget', 9.99));
 
-    const result = await useCase.execute();
+		const result = await useCase.execute();
 
-    expect(result).toHaveLength(1);
-    expect(result[0].name).toBe('Widget');
-    expect(result[0].price).toBe(9.99);
-  });
+		expect(result).toHaveLength(1);
+		expect(result[0].name).toBe('Widget');
+		expect(result[0].price).toBe(9.99);
+	});
 });

@@ -5,10 +5,10 @@ import { PlaceOrderDto } from './dto/place-order.dto';
 
 @Controller('orders')
 export class OrderController {
-  constructor(private readonly placeOrder: PlaceOrderUseCase) {}
+	constructor(private readonly placeOrder: PlaceOrderUseCase) {}
 
-  @Post()
-  place(@Body() dto: PlaceOrderDto) {
-    return this.placeOrder.execute(new PlaceOrderCommand(dto.customerId, dto.items));
-  }
+	@Post()
+	place(@Body() dto: PlaceOrderDto) {
+		return this.placeOrder.execute(new PlaceOrderCommand(dto.customerId, dto.items));
+	}
 }

@@ -1,6 +1,6 @@
 export class CreateProductCommand {
-  constructor(
-    readonly name: string,
-    readonly price: number,
-  ) {}
+	constructor(
+		readonly name: string,
+		readonly price: number,
+	) {}
 }

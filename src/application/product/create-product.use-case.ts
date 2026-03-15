@@ -6,13 +6,13 @@ import { CreateProductCommand } from './create-product.command';
 
 @Injectable()
 export class CreateProductUseCase {
-  constructor(
-    @Inject(PRODUCT_REPOSITORY)
-    private readonly repository: IProductRepository,
-  ) {}
+	constructor(
+		@Inject(PRODUCT_REPOSITORY)
+		private readonly repository: IProductRepository,
+	) {}
 
-  async execute(command: CreateProductCommand): Promise<Product> {
-    const product = Product.create(uuidv4(), command.name, command.price);
-    return this.repository.save(product);
-  }
+	async execute(command: CreateProductCommand): Promise<Product> {
+		const product = Product.create(uuidv4(), command.name, command.price);
+		return this.repository.save(product);
+	}
 }

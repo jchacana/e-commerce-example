@@ -5,13 +5,13 @@ import { InMemoryOrderRepository } from './persistence/in-memory/in-memory-order
 import { ORDER_REPOSITORY } from '../domain/order/order.repository';
 
 @Module({
-  controllers: [OrderController],
-  providers: [
-    PlaceOrderUseCase,
-    {
-      provide: ORDER_REPOSITORY,
-      useClass: InMemoryOrderRepository,
-    },
-  ],
+	controllers: [OrderController],
+	providers: [
+		PlaceOrderUseCase,
+		{
+			provide: ORDER_REPOSITORY,
+			useClass: InMemoryOrderRepository,
+		},
+	],
 })
 export class OrderModule {}

@@ -3,15 +3,15 @@ import { OrderEntity } from './order.entity';
 
 @Entity('order_items')
 export class OrderItemEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+	@PrimaryGeneratedColumn()
+	id: number;
 
-  @Column({ type: 'varchar', name: 'product_id' })
-  productId: string;
+	@Column({ type: 'varchar', name: 'product_id' })
+	productId: string;
 
-  @Column({ type: 'int' })
-  quantity: number;
+	@Column({ type: 'int' })
+	quantity: number;
 
-  @ManyToOne(() => OrderEntity, (order) => order.items)
-  order: OrderEntity;
+	@ManyToOne(() => OrderEntity, (order) => order.items)
+	order: OrderEntity;
 }

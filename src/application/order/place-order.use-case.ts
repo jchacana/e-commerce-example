@@ -6,14 +6,14 @@ import { PlaceOrderCommand } from './place-order.command';
 
 @Injectable()
 export class PlaceOrderUseCase {
-  constructor(
-    @Inject(ORDER_REPOSITORY)
-    private readonly repository: IOrderRepository,
-  ) {}
+	constructor(
+		@Inject(ORDER_REPOSITORY)
+		private readonly repository: IOrderRepository,
+	) {}
 
-  async execute(command: PlaceOrderCommand): Promise<Order> {
-    const items = command.items.map((i) => new OrderItem(i.productId, i.quantity));
-    const order = Order.place(uuidv4(), command.customerId, items);
-    return this.repository.save(order);
-  }
+	async execute(command: PlaceOrderCommand): Promise<Order> {
+		const items = command.items.map((i) => new OrderItem(i.productId, i.quantity));
+		const order = Order.place(uuidv4(), command.customerId, items);
+		return this.repository.save(order);
+	}
 }
