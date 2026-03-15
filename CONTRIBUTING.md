@@ -77,6 +77,7 @@ directly on `main`.
 - Commit with discipline on the branch: small, frequent, on green, conventional format.
 - Integrate into `main` via **squash merge only**. One branch = one commit on `main`.
   This keeps the history linear and readable.
+- After every squash merge or rebase, run `npm install` — the lock file is updated by the merge but `node_modules` is not.
 - Delete the branch after merging.
 
 AI agents doing exploratory or parallel work follow the same rules: work in an isolated
