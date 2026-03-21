@@ -50,6 +50,3 @@ Opens PRs automatically when dependencies have updates; CI runs against each PR.
 - **TypeORM layer** — `src/infrastructure/persistence/typeorm/` exists but is never wired into any module. Options: (a) keep as-is with `@nestjs/typeorm` in `knip.json` ignoreDependencies, or (b) delete the layer (YAGNI — no test drives it). Knip configuration hints will persist until resolved.
 
 ## Backlog
-
-### Dev container
-`.devcontainer/devcontainer.json` for VS Code / GitHub Codespaces / Claude Code. Already on the infrastructure roadmap. Highest value for client transfers — eliminates onboarding friction entirely.
