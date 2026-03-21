@@ -2,6 +2,9 @@
   "name": "ecommerce-api",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
   "postCreateCommand": "npm install",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": { "moby": false }
+  },
   "forwardPorts": [3000],
   "customizations": {
     "vscode": {
