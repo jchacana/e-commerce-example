@@ -185,6 +185,41 @@ Substitute your actual username in step 1. Neither file is committed to the repo
 
 **GUI applications (IntelliJ, etc.):** If the pre-push hook fails with a Docker socket error, the most likely cause is that `DOCKER_HOST` and `TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE` are not in the process environment. Set them directly in `.zshrc` (before the `direnv` hook line) to ensure they are available regardless of how the application is launched.
 
+### Dev container (optional)
+
+An alternative to the local setup above. Gives a fully configured environment inside Docker — useful for onboarding and for running Claude Code with full permissions safely.
+
+**Prerequisites:** Docker must be running.
+
+**Install the CLI once:**
+
+```sh
+npm install -g @devcontainers/cli
+```
+
+**Start the container:**
+
+```sh
+devcontainer up --workspace-folder .
+```
+
+**Run commands inside the container:**
+
+```sh
+devcontainer exec --workspace-folder . npm test
+devcontainer exec --workspace-folder . bash   # interactive shell
+```
+
+The container has Node 22, npm, and Docker CLI pre-installed. `npm install` runs automatically on first start. Integration tests work out of the box — no Docker socket configuration needed.
+
+**Claude Code with full permissions:**
+
+```sh
+devcontainer exec --workspace-folder . bash
+# inside the container:
+claude --dangerouslySkipPermissions
+```
+
 ### Quality gates (enforced automatically at pre-commit / pre-push / CI)
 
 ```sh
