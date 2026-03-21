@@ -139,6 +139,17 @@ writing any code. Do not begin implementation without it.
 
 **Running a worktree experiment**: invoke the `experiment` skill. Do not apply exploratory changes directly to main.
 
+## Agent Rules
+
+### Launching sub-agents (worktree experiments, parallel tasks)
+- Never hardcode the main tree path in an agent prompt — agents must work in their cwd.
+- Always write: "Work in your current directory. Do not use absolute paths."
+- Always tell agents to commit before finishing: "Commit your work to this branch when done. Do not push."
+
+### Applying changes to docs or CLAUDE.md
+- Always show a draft and wait for explicit confirmation before applying any change to `CLAUDE.md` or files under `docs/`.
+- Do not push to remote unless explicitly asked.
+
 ## In Progress
 
 > Update this section when parking mid-cycle. Clear it when the cycle completes and you commit.
