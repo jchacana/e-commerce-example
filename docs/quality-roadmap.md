@@ -51,8 +51,5 @@ Opens PRs automatically when dependencies have updates; CI runs against each PR.
 
 ## Backlog
 
-### `experiment` skill
-Formalise the worktree experiment pattern as a callable skill. The pattern is well-documented in CLAUDE.md and CONTRIBUTING.md but complex enough (main must not move, always commit, squash merge, never resume after main moves) to warrant a guided skill for agents.
-
 ### Dev container
 `.devcontainer/devcontainer.json` for VS Code / GitHub Codespaces / Claude Code. Already on the infrastructure roadmap. Highest value for client transfers — eliminates onboarding friction entirely.

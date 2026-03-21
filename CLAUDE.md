@@ -137,6 +137,8 @@ writing any code. Do not begin implementation without it.
 
 **Recording an architectural decision**: invoke the `architect` skill. Do not write an ADR manually.
 
+**Running a worktree experiment**: invoke the `experiment` skill. Do not apply exploratory changes directly to main.
+
 ## In Progress
 
 > Update this section when parking mid-cycle. Clear it when the cycle completes and you commit.
