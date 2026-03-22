@@ -1,7 +1,13 @@
 {
   "name": "ecommerce-api",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
-  "postCreateCommand": "npm install && npm install -g @anthropic-ai/claude-code",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      // Update NODE_VERSION here and in Dockerfile when .tool-versions is bumped
+      "NODE_VERSION": "22"
+    }
+  },
+  "postCreateCommand": "npm install && npm install -g @anthropic-ai/claude-code && node_ver=$(grep nodejs .tool-versions | awk '{print $2}' | cut -d. -f1) && running=$(node --version | sed 's/v//' | cut -d. -f1) && [ \"$node_ver\" = \"$running\" ] || echo \"WARNING: .tool-versions requires Node $node_ver but container is running Node $running — update NODE_VERSION in .devcontainer/Dockerfile and devcontainer.json\"",
   "features": {
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": { "moby": false }
   },
