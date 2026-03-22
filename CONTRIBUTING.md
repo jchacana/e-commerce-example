@@ -145,12 +145,23 @@ Node 22 via [asdf](https://asdf-vm.com/):
 asdf install  # reads .tool-versions
 ```
 
-### Install and run
+### Install and run (in-memory — no database needed)
 
 ```sh
 npm install
 npm run start:dev
 ```
+
+### Run with a real Postgres database
+
+```sh
+docker compose up -d        # start Postgres on localhost:5432
+cp .env.example .env        # credentials match the compose service
+npm run migration:run       # create tables
+npm run start:dev           # DATABASE_URL in .env activates TypeORM
+```
+
+To stop the database: `docker compose down`. To also delete the data volume: `docker compose down -v`.
 
 ### Tests
 
