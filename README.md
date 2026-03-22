@@ -45,6 +45,8 @@ cd my-project
 npm install
 ```
 
+> After scaffolding, update `name` in `package.json` to match your project.
+
 ## API
 
 Swagger UI: `http://localhost:3000/api/docs`
