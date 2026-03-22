@@ -125,5 +125,22 @@ Copy `.env.example` to `.env` and adjust. The `.envrc` file loads it automatical
 
 ## Adding your first aggregate
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full working agreement and TDD process.
+This scaffold enforces outside-in TDD. Every new slice follows the same cycle:
+
+```
+ACCEPTANCE TEST (RED)
+  → controller unit test (RED) → implement → GREEN
+  → use case unit test (RED)  → implement → GREEN
+  → domain unit test (RED)    → implement → GREEN
+ACCEPTANCE TEST (GREEN) ✓
+```
+
+Before writing any code:
+1. Write a spec in `docs/specs/` — see existing specs for the format
+2. Follow the cycle layer by layer, committing on each GREEN
+
+Full working agreement (TDD rules, commit discipline, branching, architecture boundaries): [`CONTRIBUTING.md`](CONTRIBUTING.md)
+
+**If you're using Claude Code:** `CLAUDE.md` is pre-configured. Invoke the `crafter` skill before starting any slice — it guides the full cycle.
+
 Architecture inventory: [`docs/architecture.md`](docs/architecture.md)
