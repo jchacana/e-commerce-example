@@ -33,7 +33,7 @@ These apply to every AI assistant working in this codebase, every session.
 ## Architecture
 
 Architecture decisions are recorded in [`docs/adr/`](docs/adr/).
-See [ADR-001](docs/adr/ADR-001.md) (architecture style), [ADR-002](docs/adr/ADR-002.md) (driving-side ports), [ADR-003](docs/adr/ADR-003.md) (testing strategy), and [ADR-004](docs/adr/ADR-004.md) (two-tier DB test strategy).
+See [ADR-001](docs/adr/ADR-001.md) (architecture style), [ADR-002](docs/adr/ADR-002.md) (driving-side ports), [ADR-003](docs/adr/ADR-003.md) (testing strategy), [ADR-004](docs/adr/ADR-004.md) (two-tier DB test strategy), and [ADR-005](docs/adr/ADR-005.md) (persistence switching strategy).
 
 Outside-in layered architecture following hexagonal principles:
 
