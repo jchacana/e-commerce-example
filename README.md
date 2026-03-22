@@ -40,7 +40,7 @@ npm test
 ### Use as a scaffold
 
 ```bash
-npx degit user/repo my-project
+npx degit jchacana/e-commerce-example my-project
 cd my-project
 npm install
 ```
