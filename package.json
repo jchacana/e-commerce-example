@@ -22,7 +22,10 @@
     "mutation": "stryker run",
     "mutation:ci": "stryker run --incremental",
     "format": "prettier --write \"{src,test}/**/*.ts\"",
-    "format:check": "prettier --check \"{src,test}/**/*.ts\""
+    "format:check": "prettier --check \"{src,test}/**/*.ts\"",
+    "migration:run": "typeorm migration:run -d src/infrastructure/persistence/typeorm/data-source.ts",
+    "migration:generate": "typeorm migration:generate -d src/infrastructure/persistence/typeorm/data-source.ts",
+    "migration:revert": "typeorm migration:revert -d src/infrastructure/persistence/typeorm/data-source.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.1.16",
@@ -77,7 +80,9 @@
     "coverageDirectory": "./coverage",
     "collectCoverageFrom": [
       "src/**/*.ts",
-      "!src/main.ts"
+      "!src/main.ts",
+      "!src/infrastructure/persistence/typeorm/data-source.ts",
+      "!src/infrastructure/persistence/typeorm/migrations/*.ts"
     ],
     "coverageThreshold": {
       "global": {
