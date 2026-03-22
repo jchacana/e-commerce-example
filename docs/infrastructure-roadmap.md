@@ -14,27 +14,20 @@ Two local dev paths are supported and complementary — neither replaces the oth
 | **Dev container** (Docker) | Onboarding, cross-OS consistency, or preference. |
 
 `.tool-versions` is the single source of truth for the Node version. The dev container
-derives its Node version from it — one pin, two surfaces.
+`ARG NODE_VERSION` in `.devcontainer/Dockerfile` must be kept in sync manually; a
+`postCreateCommand` validation warns immediately if they diverge.
 
 ---
 
 ## In Place
 
 - `.tool-versions` — pins Node version for asdf; consumed by CI via `node-version-file`
+- `.devcontainer/` — reproducible dev environment via Docker; Node version pinned in `.devcontainer/Dockerfile` with drift detection against `.tool-versions`; includes Docker CLI (docker-outside-of-docker feature) and Claude Code CLI; supported by VS Code, GitHub Codespaces, and `@devcontainers/cli`
+- `docker-compose.yml` — local Postgres 16 for dev use with TypeORM repositories; credentials match `.env.example`; not wired into the test suite (integration tests use Testcontainers per ADR-004)
 
 ---
 
 ## Planned
-
-### Dev container — reproducible dev environment
-
-A `.devcontainer/devcontainer.json` that defines a Docker image with the correct Node
-version (read from `.tool-versions`), npm, and all tooling pre-installed.
-
-- Removes "works on my machine" issues for cross-OS teams and onboarding
-- Supported natively by Claude Code, VS Code, and GitHub Codespaces
-- CI can optionally adopt the same image for full parity
-- Does not affect the native path — asdf users are unaffected
 
 ### Dockerfile — reproducible production artifact
 
@@ -43,22 +36,6 @@ Multi-stage build:
 2. **Runtime stage**: minimal image, copies `dist/` only — no devDependencies, no source
 
 Makes the production deployment auditable and environment-independent.
-
-### Docker Compose — test database for acceptance tests
-
-Relevant when the in-memory repositories are replaced with a real persistence layer
-(TypeORM + PostgreSQL). Compose spins up a clean, isolated PostgreSQL instance for the
-acceptance test suite.
-
-**Impact on the crafter cycle:** the acceptance layer setup would extend to:
-```
-beforeAll: docker compose up db → buildApp()
-afterAll:  app.close() → docker compose down
-```
-The inside-out TDD cycle (controller → use case → domain) is unaffected — those layers
-are unit-tested with mocks and never touch the database.
-
-**Implement after:** first TypeORM/PostgreSQL persistence slice is planned.
 
 ---
 

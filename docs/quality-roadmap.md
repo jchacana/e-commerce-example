@@ -12,11 +12,13 @@
 - Secretlint — scans all staged files for credential patterns on pre-commit and CI; `.env.example` excluded via `.secretlintignore`
 - commitlint — enforces conventional commit format (`feat:`, `fix:`, `chore:`, etc.) on `commit-msg` hook
 - dependency-cruiser — static import graph rules; three forbidden boundary rules enforced at pre-commit and CI
-- knip — unused files, exports, and dependencies; pre-push and CI; `src/**/*.dto.ts` treated as entry points to avoid decorator false positives; `@nestjs/typeorm` and `testcontainers` added to `ignoreDependencies` (indirect usage, not false positives)
+- knip — unused files, exports, and dependencies; pre-push and CI; `src/**/*.dto.ts`, `data-source.ts`, and `migrations/*.ts` treated as entry points; `testcontainers` in `ignoreDependencies` (indirect usage via Testcontainers internals)
 - Stryker mutation testing — validates test quality on `src/domain/**` (pure business logic); incremental mode on PRs (fast, caches results keyed on branch name); full weekly scheduled run resets the baseline; mutation score 100% at initial setup; HTML report written to `.stryker-tmp/reports/mutation/mutation.html`; thresholds: high 80 / low 60 / break 80. **Guarantee strategy**: (1) `crafter` skill runs `npm run mutation` locally after any new domain behaviour and requires 0 surviving mutants before committing; (2) the PR mutation CI check should be set as a required status check in GitHub branch protection rules for `main` — this ensures nothing merges with surviving mutants without adding overhead to local hooks
 - Prettier — consistent formatting enforced on `{src,test}/**/*.ts`; config: `.prettierrc` (tabs, 120 col width, single quotes, trailing commas `all`, semicolons); wired into lint-staged (format before ESLint) and CI format check step (`npm run format:check`)
 - OpenAPI / Swagger — `@nestjs/swagger` wired into `src/main.ts`; docs served at `/api/docs`
 - Health check — `GET /health` via `@nestjs/terminus`; returns `{ status: 'ok' }`; acceptance-tested
+- TypeORM persistence layer — `TypeOrmProductRepository` and `TypeOrmOrderRepository` implement domain port interfaces; conditional wiring via `DATABASE_URL` presence (see ADR-005); migrations in `src/infrastructure/persistence/typeorm/migrations/`
+- `experiment` skill — formalises the worktree experiment pattern as a callable skill
 
 ## Known Warnings (no direct fix available)
 
