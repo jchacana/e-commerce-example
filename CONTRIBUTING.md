@@ -238,6 +238,7 @@ npm run lint          # ESLint
 npm run format        # Prettier (auto-fix); npm run format:check to check only
 npm run typecheck     # TypeScript strict
 npm run arch:check    # Hexagonal boundary enforcement
+npm run check:ac      # AC coverage — every spec AC-XXX must be referenced in a test
 npm run secretlint    # Credential scan
 npm run audit         # npm audit (high severity, prod deps only)
 npm run mutation      # Stryker mutation testing (domain only); run after any new domain behaviour

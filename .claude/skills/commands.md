@@ -21,6 +21,7 @@ npm run lint:fix            # ESLint with auto-fix
 npm run format              # Prettier format all src/test files
 npm run format:check        # Prettier check (used in CI)
 npm run arch:check          # hexagonal boundary enforcement
+npm run check:ac            # AC coverage — every spec AC-XXX must be referenced in a test
 npm run audit               # npm audit --audit-level=high --omit=dev
 npm run mutation            # Stryker full run (domain only)
 npm run mutation:ci         # Stryker incremental run (domain only)

@@ -9,7 +9,8 @@ disable-model-invocation: true
 1. `npx lint-staged` — Prettier format + ESLint on staged `.ts` files, `--max-warnings=0`
 2. `npm run typecheck` — `tsc --noEmit`, full project
 3. `npm run arch:check` — hexagonal boundary enforcement
-4. `npm run test:unit` — unit tests only (acceptance and integration excluded)
+4. `npm run check:ac` — every AC-XXX in specs must be referenced in a test, and vice versa
+5. `npm run test:unit` — unit tests only (acceptance and integration excluded)
 5. `npm run audit` — blocks on high/critical CVEs (conditional: only when `src/`, `test/`, or `package*.json` are staged)
 
 ## Pre-push gates (in order)
@@ -20,7 +21,7 @@ disable-model-invocation: true
 ## CI (`.github/workflows/ci.yml`)
 
 Runs on push and PR to `main`:
-secretlint → lint → format:check → arch:check → knip → typecheck → test --coverage → audit
+secretlint → lint → format:check → arch:check → check:ac → knip → typecheck → test --coverage → audit
 
 Uses `node-version-file: .tool-versions` and `npm ci`.
 
@@ -34,8 +35,8 @@ Uses `node-version-file: .tool-versions` and `npm ci`.
 ## Mutation testing (`.github/workflows/mutation.yml`)
 
 - Scope: `src/domain/**/*.ts` only
-- PR runs: incremental mode (`--incremental`), branch-keyed cache — fast
-- Weekly scheduled run: full reset, no cache
+- Pre-push: incremental mode (`npx stryker run --incremental`) — fast, only re-runs mutants affected by local changes
+- Weekly scheduled CI run: full reset, seeds `stryker-incremental-main` cache
 - Local: `npm run mutation` — run after any new domain behaviour; 0 surviving mutants required before committing (enforced by `crafter` skill)
 
 ## Roadmap
