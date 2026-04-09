@@ -19,6 +19,7 @@
 - Health check — `GET /health` via `@nestjs/terminus`; returns `{ status: 'ok' }`; acceptance-tested
 - TypeORM persistence layer — `TypeOrmProductRepository` and `TypeOrmOrderRepository` implement domain port interfaces; conditional wiring via `DATABASE_URL` presence (see ADR-005); migrations in `src/infrastructure/persistence/typeorm/migrations/`
 - `experiment` skill — formalises the worktree experiment pattern as a callable skill
+- AC coverage check — `scripts/check-ac-coverage.js` verifies every `AC-XXX` ID in `docs/specs/` is referenced in at least one test file, and vice versa; wired into pre-commit hook and CI (`npm run check:ac`)
 
 ## Known Warnings (no direct fix available)
 
@@ -55,8 +56,6 @@ Opens PRs automatically when dependencies have updates; CI runs against each PR.
 - **Dependency-cruiser rule: no framework imports in `domain/`** — forbid any non-stdlib import in `src/domain/**` except project-internal domain files. Hardens the purity guarantee currently enforced only by convention.
 
 ### AI Development Guardrails
-
-- **AC coverage check** — script that verifies every `AC-XXX` ID declared in `docs/specs/` has at least one corresponding `// AC-XXX` comment in a test file; run on pre-commit or CI. Catches specs implemented partially or not at all, and prevents ACs from drifting silently from tests.
 
 - **Uncommitted changes gate** — pre-push hook that fails if any tracked file is modified or any untracked file exists in `src/` or `test/`. Prevents AI from committing partial work and leaving the repo in a half-baked state.
 
