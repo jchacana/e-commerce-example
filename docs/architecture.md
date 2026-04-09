@@ -14,15 +14,16 @@ Endpoints: `POST /products`, `GET /products`, `GET /products/:id`
 - `src/infrastructure/product.module.ts` — NestJS wiring
 - `test/acceptance/products.acceptance.spec.ts` — 7 scenarios GREEN ✓
 
-## Orders — Place Order slice (all tests GREEN)
+## Orders — Place + Get Order slice (all tests GREEN)
 
-Endpoints: `POST /orders`
+Endpoints: `POST /orders`, `GET /orders/:id`
 
 - `src/domain/order/order.ts` — `Order` + `OrderItem` entities
 - `src/domain/order/order.repository.ts` — `IOrderRepository` interface + token
 - `src/application/order/place-order.use-case.ts` — `PlaceOrderUseCase`
+- `src/application/order/get-order.use-case.ts` — `GetOrderUseCase`
 - `src/infrastructure/http/order/order.controller.ts` — controller
 - `src/infrastructure/http/order/dto/place-order.dto.ts` — `PlaceOrderDto`
 - `src/infrastructure/persistence/in-memory/in-memory-order.repository.ts` — in-memory impl
 - `src/infrastructure/order.module.ts` — NestJS wiring
-- `test/acceptance/orders.acceptance.spec.ts` — 3 scenarios GREEN ✓
+- `test/acceptance/orders.acceptance.spec.ts` — 5 scenarios GREEN ✓

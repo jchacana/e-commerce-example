@@ -164,7 +164,7 @@ Full inventory of implemented slices → [`docs/architecture.md`](docs/architect
 | Aggregate | Endpoints | Status |
 |-----------|-----------|--------|
 | Products  | `POST /products`, `GET /products`, `GET /products/:id` | all GREEN ✓ |
-| Orders    | `POST /orders` | all GREEN ✓ |
+| Orders    | `POST /orders`, `GET /orders/:id` | all GREEN ✓ |
 
 > **Discipline:** update `docs/architecture.md` (and this table) as part of the commit that moves a slice from RED to GREEN.
 
