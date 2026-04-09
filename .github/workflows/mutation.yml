@@ -30,6 +30,13 @@ jobs:
       - name: Run mutation tests (full)
         run: npx stryker run
 
+      - name: Save Stryker incremental cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .stryker-tmp/incremental.json
+          key: stryker-incremental-main
+
   mutation-pr:
     name: Incremental mutation run (PR)
     if: github.event_name == 'pull_request'
