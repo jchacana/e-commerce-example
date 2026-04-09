@@ -13,7 +13,7 @@
 - commitlint — enforces conventional commit format (`feat:`, `fix:`, `chore:`, etc.) on `commit-msg` hook
 - dependency-cruiser — static import graph rules; three forbidden boundary rules enforced at pre-commit and CI
 - knip — unused files, exports, and dependencies; pre-push and CI; `src/**/*.dto.ts`, `data-source.ts`, and `migrations/*.ts` treated as entry points; `testcontainers` in `ignoreDependencies` (indirect usage via Testcontainers internals)
-- Stryker mutation testing — validates test quality on `src/domain/**` (pure business logic); incremental mode on PRs (fast, caches results keyed on branch name); full weekly scheduled run resets the baseline; mutation score 100% at initial setup; HTML report written to `.stryker-tmp/reports/mutation/mutation.html`; thresholds: high 80 / low 60 / break 80. **Guarantee strategy**: (1) `crafter` skill runs `npm run mutation` locally after any new domain behaviour and requires 0 surviving mutants before committing; (2) the PR mutation CI check should be set as a required status check in GitHub branch protection rules for `main` — this ensures nothing merges with surviving mutants without adding overhead to local hooks
+- Stryker mutation testing — validates test quality on `src/domain/**` (pure business logic); incremental mode runs on pre-push (fast — only re-tests mutants affected by local changes); full weekly scheduled run resets the baseline and seeds the CI incremental cache (`stryker-incremental-main`); mutation score 100% at initial setup; HTML report written to `.stryker-tmp/reports/mutation/mutation.html`; thresholds: high 80 / low 60 / break 80. **Guarantee strategy**: `crafter` skill runs `npm run mutation` locally after any new domain behaviour and requires 0 surviving mutants before committing
 - Prettier — consistent formatting enforced on `{src,test}/**/*.ts`; config: `.prettierrc` (tabs, 120 col width, single quotes, trailing commas `all`, semicolons); wired into lint-staged (format before ESLint) and CI format check step (`npm run format:check`)
 - OpenAPI / Swagger — `@nestjs/swagger` wired into `src/main.ts`; docs served at `/api/docs`
 - Health check — `GET /health` via `@nestjs/terminus`; returns `{ status: 'ok' }`; acceptance-tested
@@ -42,10 +42,6 @@ Opens PRs automatically when dependencies have updates; CI runs against each PR.
 - Config: `renovate.json` at repo root
 - Group strategy: patch/minor together, major separate
 - Wire into: GitHub App (no local tooling needed)
-
-## Pending (manual action required)
-
-- **GitHub branch protection** — set the `mutation-pr` CI check as a required status check on `main`. Prevents merging with surviving mutants without adding overhead to local hooks. Must be done by repo owner in GitHub settings.
 
 
 ## Backlog
