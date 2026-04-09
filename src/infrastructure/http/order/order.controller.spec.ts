@@ -1,15 +1,22 @@
+import { NotFoundException } from '@nestjs/common';
 import { OrderController } from './order.controller';
 import { PlaceOrderUseCase } from '../../../application/order/place-order.use-case';
+import { GetOrderUseCase } from '../../../application/order/get-order.use-case';
 import { PlaceOrderCommand } from '../../../application/order/place-order.command';
 import { Order, OrderItem } from '../../../domain/order/order';
 
 describe('OrderController', () => {
 	let controller: OrderController;
 	let mockPlaceOrder: { execute: jest.Mock };
+	let mockGetOrder: { execute: jest.Mock };
 
 	beforeEach(() => {
 		mockPlaceOrder = { execute: jest.fn() };
-		controller = new OrderController(mockPlaceOrder as unknown as PlaceOrderUseCase);
+		mockGetOrder = { execute: jest.fn() };
+		controller = new OrderController(
+			mockPlaceOrder as unknown as PlaceOrderUseCase,
+			mockGetOrder as unknown as GetOrderUseCase,
+		);
 	});
 
 	it('delegates to PlaceOrderUseCase with a command built from the DTO', async () => {
@@ -25,6 +32,22 @@ describe('OrderController', () => {
 			new PlaceOrderCommand('customer-1', [{ productId: 'product-1', quantity: 2 }]),
 		);
 		expect(result).toBe(order);
+	});
+
+	it('delegates to GetOrderUseCase and returns the order', async () => {
+		const order = new Order('order-1', 'customer-1', [new OrderItem('product-1', 2)]);
+		mockGetOrder.execute.mockResolvedValue(order);
+
+		const result = await controller.findOne('order-1');
+
+		expect(mockGetOrder.execute).toHaveBeenCalledWith('order-1');
+		expect(result).toBe(order);
+	});
+
+	it('throws NotFoundException when the order does not exist', async () => {
+		mockGetOrder.execute.mockResolvedValue(null);
+
+		await expect(controller.findOne('missing')).rejects.toThrow(NotFoundException);
 	});
 
 	it('returns whatever the use case returns', async () => {

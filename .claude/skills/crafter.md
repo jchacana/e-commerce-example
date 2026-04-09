@@ -14,9 +14,12 @@ SPEC (AGREED)
 
 For each scenario, one at a time:
   ACCEPTANCE (RED)
-  → unit test controller (RED)    → implement controller (GREEN)
-  → unit test use case (RED)      → implement use case (GREEN)
-  → unit test domain (RED)        → implement domain (GREEN)  [skip if no new domain behaviour]
+  → unit test controller (RED)    [stop — wait for user]
+  → implement controller (GREEN)  [stop — wait for user]
+  → unit test use case (RED)      [stop — wait for user]
+  → implement use case (GREEN)    [stop — wait for user]
+  → unit test domain (RED)        [stop — wait for user]  [skip if no new domain behaviour]
+  → implement domain (GREEN)      [stop — wait for user]
   → refactor (GREEN stays GREEN)
   → ACCEPTANCE (GREEN) ✓
   → if new domain behaviour was introduced: run npm run mutation — confirm 0 surviving mutants

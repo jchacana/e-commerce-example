@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { OrderController } from './http/order/order.controller';
 import { PlaceOrderUseCase } from '../application/order/place-order.use-case';
+import { GetOrderUseCase } from '../application/order/get-order.use-case';
 import { InMemoryOrderRepository } from './persistence/in-memory/in-memory-order.repository';
 import { ORDER_REPOSITORY } from '../domain/order/order.repository';
 import { TypeOrmOrderRepository } from './persistence/typeorm/typeorm-order.repository';
@@ -29,6 +30,6 @@ const repositoryProvider = useTypeOrm
 @Module({
 	imports: typeOrmFeatureImports,
 	controllers: [OrderController],
-	providers: [PlaceOrderUseCase, repositoryProvider],
+	providers: [PlaceOrderUseCase, GetOrderUseCase, repositoryProvider],
 })
 export class OrderModule {}

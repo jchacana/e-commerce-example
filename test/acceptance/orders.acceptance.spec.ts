@@ -20,6 +20,30 @@ describe('Orders (acceptance)', () => {
 		await app.close();
 	});
 
+	describe('GET /orders/:id', () => {
+		// Covers: get-order AC-012
+		it('returns 200 with the order when it exists', async () => {
+			const postRes = await request(app.getHttpServer())
+				.post('/orders')
+				.send({ customerId: 'customer-1', items: [{ productId: 'product-1', quantity: 2 }] });
+
+			await request(app.getHttpServer())
+				.get(`/orders/${postRes.body.id}`)
+				.expect(200)
+				.expect(({ body }) => {
+					expect(body.id).toBe(postRes.body.id);
+					expect(body.customerId).toBe('customer-1');
+					expect(body.items).toHaveLength(1);
+					expect(body.items[0].productId).toBe('product-1');
+					expect(body.items[0].quantity).toBe(2);
+				});
+		});
+		// Covers: get-order AC-013
+		it('returns 404 when the order does not exist', async () => {
+			await request(app.getHttpServer()).get('/orders/does-not-exist').expect(404);
+		});
+	});
+
 	describe('POST /orders', () => {
 		// Covers: place-order AC-001
 		it('places an order and returns 201 with the persisted resource', async () => {
