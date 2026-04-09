@@ -49,3 +49,5 @@ Opens PRs automatically when dependencies have updates; CI runs against each PR.
 
 
 ## Backlog
+
+- **Remove NestJS decorators from application layer use cases** — `@Injectable()` and `@Inject()` in use cases couple the application layer to the NestJS framework, violating hexagonal principles. Use cases should be plain classes; DI wiring should be the module's responsibility. Affects: `create-product.use-case.ts`, `get-all-products.use-case.ts`, `get-product.use-case.ts`, `place-order.use-case.ts`.
