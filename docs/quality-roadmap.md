@@ -46,4 +46,30 @@ Opens PRs automatically when dependencies have updates; CI runs against each PR.
 
 ## Backlog
 
-- **Remove NestJS decorators from application layer use cases** — `@Injectable()` and `@Inject()` in use cases couple the application layer to the NestJS framework, violating hexagonal principles. Use cases should be plain classes; DI wiring should be the module's responsibility. Affects: `create-product.use-case.ts`, `get-all-products.use-case.ts`, `get-product.use-case.ts`, `place-order.use-case.ts`.
+### Architecture & Design
+
+- **Remove NestJS decorators from application layer use cases** — `@Injectable()` and `@Inject()` in use cases couple the application layer to the NestJS framework, violating hexagonal principles. Use cases should be plain classes; DI wiring should be the module's responsibility. Affects: `create-product.use-case.ts`, `get-all-products.use-case.ts`, `get-product.use-case.ts`, `place-order.use-case.ts`, `get-order.use-case.ts`.
+
+- **Dependency-cruiser rule: no framework imports in `application/`** — forbid `@nestjs/*` imports in `src/application/**`; enforced at pre-commit and CI. Automates the architectural invariant and directly addresses the decorator item above.
+
+- **Dependency-cruiser rule: no framework imports in `domain/`** — forbid any non-stdlib import in `src/domain/**` except project-internal domain files. Hardens the purity guarantee currently enforced only by convention.
+
+### AI Development Guardrails
+
+- **AC coverage check** — script that verifies every `AC-XXX` ID declared in `docs/specs/` has at least one corresponding `// AC-XXX` comment in a test file; run on pre-commit or CI. Catches specs implemented partially or not at all, and prevents ACs from drifting silently from tests.
+
+- **Uncommitted changes gate** — pre-push hook that fails if any tracked file is modified or any untracked file exists in `src/` or `test/`. Prevents AI from committing partial work and leaving the repo in a half-baked state.
+
+- **Commit identity check** — pre-commit hook that verifies `git config user.email` is set to a non-default, expected value. Prevents commits being attributed to a ghost or misconfigured identity.
+
+- **Commit signing** — enforce GPG/SSH signed commits via GitHub branch protection rules on `main`. Cryptographically verifiable authorship. Must be configured by repo owner in GitHub settings.
+
+- **Secrets scanning** — already covered by Secretlint (pre-commit + CI, scans all staged files). No action needed.
+
+- **Fitness functions** — define and automate architectural fitness functions for this codebase beyond what is already in place. Candidates: cyclomatic complexity per function (ESLint `complexity` rule), domain layer size vs. infrastructure size ratio, test-to-code file ratio, max dependency depth. Existing fitness functions: dependency-cruiser (boundary rules), coverage thresholds (95%/85%), mutation score (≥80%), `knip` (no dead code).
+
+### Process (not automatable)
+
+- **Overconfidence rule** — strengthen CLAUDE.md: AI must explicitly flag uncertainty *before* acting, propose a plan, and wait for confirmation when outcome is unclear. Complements the experiment/worktree pattern.
+
+- **Commit scope review heuristic** — during review, flag commits touching more than one architectural layer without a clear reason. Not automated (too noisy), but worth making explicit as a review discipline.
