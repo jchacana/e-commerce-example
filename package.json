@@ -19,6 +19,7 @@
     "test:integration": "jest --selectProjects integration --runInBand",
     "secretlint": "secretlint --secretlintrc .secretlintrc.json \"**/*\"",
     "arch:check": "depcruise src --config .dependency-cruiser.cjs",
+    "check:ac": "node scripts/check-ac-coverage.js",
     "mutation": "stryker run",
     "mutation:ci": "stryker run --incremental",
     "format": "prettier --write \"{src,test}/**/*.ts\"",

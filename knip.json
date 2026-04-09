@@ -1,6 +1,7 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "entry": [
+    "scripts/check-ac-coverage.js",
     "src/main.ts",
     "src/**/*.module.ts",
     "src/**/*.dto.ts",

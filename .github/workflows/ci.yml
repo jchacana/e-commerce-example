@@ -38,6 +38,9 @@ jobs:
       - name: Architecture check
         run: npm run arch:check
 
+      - name: AC coverage
+        run: npm run check:ac
+
       - name: Unused code
         run: npx knip
 
