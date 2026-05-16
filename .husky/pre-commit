@@ -1,12 +1,18 @@
 #!/bin/sh
 set -e
-npx lint-staged          # ESLint on staged .ts files
-npm run typecheck        # type errors block commit
-npm run arch:check       # architectural boundary violations block commit
-npm run check:ac         # AC coverage — every spec AC must be referenced in a test
-npm run test:unit        # unit tests must be green
 
-# Audit only when source or dependency files are staged
+npx lint-staged   # secrets, format — always required
+npm run arch:check
+
+# WIP=1: skip heavy gates so you can commit on red
+if [ "${WIP:-0}" = "1" ]; then
+  exit 0
+fi
+
+npm run typecheck
+npm run check:ac
+npm run test:unit
+
 if git diff --cached --name-only | grep -qE '^(src/|test/|package\.json|package-lock\.json)'; then
   npm run audit
 fi
