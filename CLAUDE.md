@@ -126,6 +126,18 @@ Common types: `feat`, `fix`, `chore`, `refactor`, `test`, `docs`. Description in
 Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
 ```
 
+### Committing on red
+
+The pre-commit hook supports a WIP mode. Use it to commit after writing a failing
+test or between refactor steps, before the suite is green:
+
+```
+WIP=1 git commit -m "wip: add failing test for X"
+```
+
+`lint-staged` and `arch:check` still run. `typecheck`, `test:unit`, `check:ac`,
+and `audit` are skipped. Never push `wip:` commits.
+
 ## Process
 
 **Implementing a new feature or aggregate slice**: invoke the `crafter` skill before
@@ -138,6 +150,18 @@ writing any code. Do not begin implementation without it.
 **Recording an architectural decision**: invoke the `architect` skill. Do not write an ADR manually.
 
 **Running a worktree experiment**: invoke the `experiment` skill. Do not apply exploratory changes directly to main.
+
+## Session discipline
+
+- One use case per session. When the slice is committed and green, close the session.
+- Filter bash output aggressively — verbose output burns context:
+  - Tests: `| grep -E "FAIL|Tests:|Test Suites:|Coverage"`
+  - npm install/audit: `| grep -E "error|warn|vulnerabilit|added|removed"`
+- If compaction happens mid-refactor and files are partially modified: run
+  `git status`, revert unstaged changes to the last commit, and re-brief from
+  the In Progress section.
+- Never do git history work (rebase, reset, cherry-pick sequences) mid-session.
+  Do it as the first thing in a fresh session, or as a single atomic script.
 
 ## Agent Rules
 
@@ -152,7 +176,9 @@ writing any code. Do not begin implementation without it.
 
 ## In Progress
 
-> Update this section when parking mid-cycle. Clear it when the cycle completes and you commit.
+> Update this section BEFORE starting any multi-step operation (refactor sequence,
+> layered feature, git history changes). Update again when parking. Clear when the
+> cycle completes and you commit.
 > Format: feature name, current cycle position, next concrete step.
 
 _Nothing in progress — all slices GREEN._
