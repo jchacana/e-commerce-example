@@ -34,3 +34,6 @@ coverage/
 
 # Claude Code local settings (machine-specific)
 .claude/settings.local.json
+
+# Working drafts — local only
+work-agents-draft.md
