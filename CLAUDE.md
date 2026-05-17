@@ -151,6 +151,8 @@ writing any code. Do not begin implementation without it.
 
 **Running a worktree experiment**: invoke the `experiment` skill. Do not apply exploratory changes directly to main.
 
+**Remediating dependency vulnerabilities**: invoke the `security-patch` skill. Do not patch deps directly on main.
+
 ## Session discipline
 
 - One use case per session. When the slice is committed and green, close the session.
