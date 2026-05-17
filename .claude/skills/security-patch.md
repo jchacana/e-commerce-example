@@ -111,7 +111,7 @@ Verify:
 ```bash
 git merge --squash <branch>
 # write a single commit: "fix(deps): remediate npm audit vulnerabilities"
-git branch -d <branch>
+git branch -D <branch>   # squash merges don't register as merged; -D is always correct here
 npm install   # lock file updated by merge; node_modules is not
 ```
 

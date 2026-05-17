@@ -41,7 +41,7 @@ If abandoned: note why. Do not carry the idea forward silently.
 ```bash
 git merge --squash <branch>
 # stage and commit with a single descriptive message
-git branch -d <branch>
+git branch -D <branch>   # squash merges don't register as merged; -D is always correct here
 npm install   # lock file was updated by the merge; node_modules is not
 ```
 
