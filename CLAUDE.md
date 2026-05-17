@@ -154,6 +154,9 @@ writing any code. Do not begin implementation without it.
 ## Session discipline
 
 - One use case per session. When the slice is committed and green, close the session.
+- One phase per session — planning and building do not share a session:
+  - Planning session: `po`, `architect` — close when spec and ADR are committed
+  - Building session: `crafter` — starts fresh, reads spec and ADR from files
 - Filter bash output aggressively — verbose output burns context:
   - Tests: `| grep -E "FAIL|Tests:|Test Suites:|Coverage"`
   - npm install/audit: `| grep -E "error|warn|vulnerabilit|added|removed"`
