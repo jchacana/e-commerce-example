@@ -34,7 +34,7 @@ Rules:
 - Do not write any test or production code until the spec is confirmed.
 - Never write production code without a failing test driving it.
 - Never refactor on red.
-- Show test output at every step (failure and green).
+- At every RED and GREEN step, run tests via the test-runner subagent — never run jest commands inline in the main session. Show the subagent's pass/fail report at each step.
 - Ask before moving to the next layer.
 - Updating Current State and committing are part of the cycle — not optional.
 - If new domain behaviour was introduced, mutation score must be 0 surviving mutants before committing. This is not optional.
